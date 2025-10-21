@@ -1,0 +1,42 @@
+@if (popoverData()) {
+    <div 
+      class="fixed z-50 bg-white rounded-lg shadow-xl border border-gray-200 p-4 min-w-[250px] animate-fade-in"
+      [style.left.px]="position().x + 10"
+      [style.top.px]="position().y + 10"
+    >
+      <button 
+        (click)="close()"
+        class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 transition-colors"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+  
+      <div class="pr-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-3">
+          {{ popoverData()!.node.label }}
+        </h3>
+        
+        <div class="space-y-2">
+          <div class="flex justify-between">
+            <span class="text-sm text-gray-600">ID:</span>
+            <span class="text-sm font-medium text-gray-900">{{ popoverData()!.node.id }}</span>
+          </div>
+          
+          <div class="flex justify-between">
+            <span class="text-sm text-gray-600">Value:</span>
+            <span class="text-sm font-medium text-gray-900">{{ popoverData()!.node.value }}</span>
+          </div>
+          
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-gray-600">Color:</span>
+            <div 
+              class="w-6 h-6 rounded border border-gray-300"
+              [style.background-color]="popoverData()!.node.color"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }

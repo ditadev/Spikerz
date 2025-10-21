@@ -1,0 +1,43 @@
+<div class="relative w-full h-[500px] border border-gray-200 rounded-lg overflow-hidden">
+    <svg 
+      #svgCanvas
+      class="w-full h-full"
+      (click)="onCanvasClick($event)">
+      
+      <!-- Render edges -->
+      @for (edge of edges(); track edge.source + edge.target) {
+        <line
+          [attr.x1]="getNodePosition(edge.source).x"
+          [attr.y1]="getNodePosition(edge.source).y"
+          [attr.x2]="getNodePosition(edge.target).x"
+          [attr.y2]="getNodePosition(edge.target).y"
+          stroke="#CBD5E1"
+          stroke-width="2"
+          class="transition-all duration-300"
+        />
+      }
+  
+      <!-- Render nodes -->
+      @for (node of nodes(); track node.id) {
+        <g 
+          class="cursor-pointer transition-transform hover:scale-110"
+          (click)="onNodeClick(node, $event)">
+          <circle
+            [attr.cx]="node.x"
+            [attr.cy]="node.y"
+            r="24"
+            [attr.fill]="node.color || '#3B82F6'"
+            class="transition-all duration-300"
+          />
+          <text
+            [attr.x]="node.x"
+            [attr.y]="(node.y ?? 0) + 40"
+            text-anchor="middle"
+            class="text-sm font-medium fill-gray-700 pointer-events-none"
+          >
+            {{ node.label }}
+          </text>
+        </g>
+      }
+    </svg>
+  </div>
