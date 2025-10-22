@@ -6,15 +6,16 @@
         
         <!-- Card Title -->
         <div class="mb-4">
-          <h3 class="text-base font-semibold text-gray-900">{{ card.title }}</h3>
+          <h3 class="font-bold text-gray-900" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">{{ card.title }}</h3>
         </div>
   
         <!-- Items - Always Visible -->
         <div class="space-y-4 mb-4">
           @for (item of card.items; track item.label) {
-            <div class="flex items-start gap-4">
+            <!-- Entire item with gray background -->
+            <div class="bg-gray-50 rounded-lg px-4 py-1.5 flex items-center gap-4">
               <!-- Icon -->
-              <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+              <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
                 <svg class="w-7 h-7 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="2" y="6" width="20" height="12" rx="2"/>
                   <line x1="6" y1="12" x2="6.01" y2="12"/>
@@ -23,14 +24,14 @@
               </div>
               
               <!-- Content -->
-              <div class="flex-1 min-w-0 flex items-start gap-6">
+              <div class="flex-1 flex items-center gap-4">
                 <div class="flex-shrink-0">
                   <div class="text-sm font-semibold text-gray-900">{{ item.label }}</div>
                   <div class="text-sm text-gray-500">{{ item.sublabel }}</div>
                 </div>
                 
                 <!-- Vertical Divider -->
-                <div class="w-px h-12 bg-gray-200"></div>
+                <div class="w-px h-12 bg-gray-300"></div>
                 
                 <!-- Info Text -->
                 <div class="flex-1 text-sm text-gray-600 leading-relaxed">

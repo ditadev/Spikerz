@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon'; 
 import { SidebarComponent } from '../sidebar/sidebar';
 import { GraphViewComponent } from '../graph-view/graph-view';
 import { NodePopoverComponent } from '../node-popover/node-popover';
@@ -10,7 +11,8 @@ import { GraphDataService } from '../../services/graph-data.service';
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
+    MatIconModule,  // ADD THIS LINE
     SidebarComponent, 
     GraphViewComponent, 
     NodePopoverComponent,

@@ -42,12 +42,12 @@
   <div class="px-4 pb-4 border-t border-gray-200 pt-4 space-y-2">
     @for (item of bottomMenuItems; track item.label) {
       <button
-        class="w-full flex items-center justify-start gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors group relative">
+        class="w-full flex items-center justify-start gap-3 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors group relative menu-item">
         
         <mat-icon class="flex-shrink-0">{{ item.icon }}</mat-icon>
         
         @if (!isCollapsed()) {
-          <span class="font-normal text-gray-900" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">{{ item.label }}</span>
+          <span class="font-normal" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">{{ item.label }}</span>
         }
         
         <!-- Tooltip for collapsed state -->
