@@ -125,7 +125,6 @@ export class GraphViewComponent {
 
   onNodeClick(node: GraphNode, event: MouseEvent): void {
     event.stopPropagation();
-    console.log('Node clicked:', node);
     this.graphService.selectNode(node, { x: 0, y: 0 });
   }
 
