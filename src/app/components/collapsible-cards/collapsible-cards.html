@@ -1,8 +1,9 @@
 <div class="space-y-4">
     @for (card of cards(); track card.id) {
-      <div 
-        (click)="toggleCard(card.id)"
-        class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-200">
+      <app-card 
+        [padding]="'md'" 
+        [clickable]="true"
+        (click)="toggleCard(card.id)">
         
         <!-- Card Title -->
         <div class="mb-4">
@@ -55,6 +56,6 @@
             {{ card.description }}
           </p>
         </div>
-      </div>
+      </app-card>
     }
   </div>

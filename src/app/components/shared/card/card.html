@@ -1,0 +1,24 @@
+<div 
+  [class]="roundedClass"
+  [class.shadow-sm]="shadow"
+  [class.border]="border"
+  [class.border-gray-200]="border"
+  [class.cursor-pointer]="clickable"
+  [class.hover:shadow-md]="clickable"
+  class="bg-white transition-shadow duration-200">
+  
+  <!-- Optional Header -->
+  @if (title) {
+    <div 
+      [class]="paddingClass"
+      [class.border-b]="headerDivider"
+      [class.border-gray-200]="headerDivider">
+      <h3 class="text-xl font-bold text-emerald-600">{{ title }}</h3>
+    </div>
+  }
+  
+  <!-- Card Content (projected) -->
+  <div [class]="paddingClass">
+    <ng-content></ng-content>
+  </div>
+</div>

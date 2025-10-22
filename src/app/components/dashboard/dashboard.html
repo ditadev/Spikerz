@@ -3,11 +3,11 @@
   <app-sidebar></app-sidebar>
 
   <!-- Main Content Area -->
-  <div class="flex gap-8 flex-1 p-8 overflow-hidden">
+  <div class="flex flex-col lg:flex-row gap-8 flex-1 p-4 md:p-8 overflow-hidden">
     
-    <!-- Left Column: Description (takes remaining space) -->
-    <div class="flex-1 bg-white rounded-2xl shadow-sm overflow-y-auto">
-      <div class="p-8 space-y-8">
+    <!-- Left Column: Description -->
+    <app-card [padding]="'lg'" class="flex-1 lg:max-w-none overflow-y-auto">
+      <div class="space-y-8">
         <!-- Description Section -->
         <section>
           <h2 class="text-xl font-semibold text-emerald-600 mb-4">Description</h2>
@@ -65,10 +65,10 @@
           <app-collapsible-cards></app-collapsible-cards>
         </section>
       </div>
-    </div>
+    </app-card>
 
     <!-- Right Column: Graph & Assets -->
-    <div class="w-full max-w-3xl flex flex-col gap-5 overflow-y-auto">
+    <div class="w-full lg:max-w-3xl flex flex-col gap-5 overflow-y-auto">
       
       <!-- Graph Section with title inside -->
       <div class="bg-white rounded-2xl shadow-sm overflow-hidden">

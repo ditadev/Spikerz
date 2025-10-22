@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon'; 
+import { MatIconModule } from '@angular/material/icon';
+import { CardComponent } from '../shared/card/card';
 import { SidebarComponent } from '../sidebar/sidebar';
 import { GraphViewComponent } from '../graph-view/graph-view';
 import { NodePopoverComponent } from '../node-popover/node-popover';
@@ -12,7 +13,8 @@ import { GraphDataService } from '../../services/graph-data.service';
   standalone: true,
   imports: [
     CommonModule,
-    MatIconModule,  // ADD THIS LINE
+    MatIconModule,
+    CardComponent,
     SidebarComponent, 
     GraphViewComponent, 
     NodePopoverComponent,
