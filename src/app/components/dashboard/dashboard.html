@@ -70,20 +70,22 @@
     <!-- Right Column: Graph & Assets -->
     <div class="w-full max-w-3xl flex flex-col gap-5 overflow-y-auto">
       
-      <!-- Top: Title -->
-      <div>
-        <h1 class="text-2xl font-bold text-emerald-600">Lorem Lorem Lorem</h1>
-      </div>
-
-      <!-- Graph Section -->
-      <div class="bg-white rounded-2xl shadow-sm p-4">
-        @if (graphService.isLoading()) {
-          <div class="flex items-center justify-center h-[307px]">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
-          </div>
-        } @else {
-          <app-graph-view />
-        }
+      <!-- Graph Section with title inside -->
+      <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <!-- Title in white area -->
+        <div class="px-6 py-4">
+          <h2 class="text-xl font-bold text-emerald-600">Lorem Lorem Lorem</h2>
+        </div>
+        <!-- Graph with gray background -->
+        <div>
+          @if (graphService.isLoading()) {
+            <div class="flex items-center justify-center bg-gray-50" style="height: 24rem;">
+              <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+            </div>
+          } @else {
+            <app-graph-view />
+          }
+        </div>
       </div>
 
       <!-- Assets & Risk Section -->

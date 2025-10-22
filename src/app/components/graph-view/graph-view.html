@@ -63,41 +63,71 @@
           (mouseleave)="onNodeLeave()">
           
           <!-- Node circle -->
-          <circle
-            r="24"
-            [attr.fill]="node.color || '#3B82F6'"
-            class="node-circle transition-all duration-200"
-          />
+          @if (node.id === '1') {
+            <circle
+              r="24"
+              fill="#FEE2E2"
+              class="node-circle transition-all duration-200"
+            />
+          } @else {
+            <!-- Light blue circle for server nodes -->
+            <circle
+              r="24"
+              fill="#DBEAFE"
+              class="node-circle transition-all duration-200"
+            />
+          }
           
           <!-- Node icon -->
-          <text
-            text-anchor="middle"
-            dominant-baseline="central"
-            class="fill-white text-lg pointer-events-none select-none"
-            style="font-size: 20px;"
-          >
-            {{ getNodeIcon(node.id) }}
-          </text>
+          <g>
+            @if (node.id === '1') {
+              <!-- Red send icon for node 1 -->
+              <svg x="-14" y="-14" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pointer-events-none">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            } @else {
+              <!-- Server icon in blue -->
+              <svg x="-14" y="-14" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pointer-events-none">
+                <rect x="2" y="6" width="20" height="12" rx="2"/>
+                <line x1="6" y1="12" x2="6.01" y2="12"/>
+                <line x1="10" y1="12" x2="10.01" y2="12"/>
+              </svg>
+            }
+          </g>
           
           <!-- Badge for critical items -->
           @if (node.badge) {
-            <circle
-              cx="18"
-              cy="-18"
-              r="12"
-              fill="#EF4444"
-              class="badge-circle"
-            />
-            <text
-              x="18"
-              y="-18"
-              text-anchor="middle"
-              dominant-baseline="central"
-              class="fill-white font-bold pointer-events-none select-none"
-              style="font-size: 11px;"
-            >
-              {{ node.badge }}
-            </text>
+            @if (node.id === '1') {
+              <!-- Indigo profile badge for node 1 -->
+              <circle
+                cx="18"
+                cy="-18"
+                r="12"
+                fill="#6366F1"
+                class="badge-circle"
+              />
+              <!-- Profile/person icon -->
+              <svg x="10" y="-26" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" class="pointer-events-none">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            } @else {
+              <!-- Red shield with X for other nodes -->
+              <circle
+                cx="18"
+                cy="-18"
+                r="12"
+                fill="#EF4444"
+                class="badge-circle"
+              />
+              <!-- Shield with X icon -->
+              <svg x="10" y="-26" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" class="pointer-events-none">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <line x1="9" y1="9" x2="15" y2="15"/>
+                <line x1="15" y1="9" x2="9" y2="15"/>
+              </svg>
+            }
           }
           
           <!-- Node label -->
@@ -134,25 +164,39 @@
     </app-node-tooltip>
   }
 
-  <!-- Legend at bottom left -->
-  <div class="absolute bottom-2 left-4 flex items-center gap-4">
-    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">
-      <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
-        ⚠
+  <!-- Legend at bottom -->
+  <div class="absolute bottom-0 left-0 right-0 px-6 py-4">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
+          <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <line x1="9" y1="9" x2="15" y2="15"/>
+            <line x1="15" y1="9" x2="9" y2="15"/>
+          </svg>
+        </div>
+        <span class="text-xs font-medium text-red-500">Lorem</span>
       </div>
-      <span class="text-xs font-medium text-gray-700">Lorem</span>
-    </div>
-    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">
-      <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
-        ⚠
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center">
+          <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <line x1="9" y1="9" x2="15" y2="15"/>
+            <line x1="15" y1="9" x2="9" y2="15"/>
+          </svg>
+        </div>
+        <span class="text-xs font-medium text-yellow-500">Lorem</span>
       </div>
-      <span class="text-xs font-medium text-gray-700">Lorem</span>
-    </div>
-    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">
-      <div class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
-        ✓
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
+          <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <line x1="9" y1="9" x2="15" y2="15"/>
+            <line x1="15" y1="9" x2="9" y2="15"/>
+          </svg>
+        </div>
+        <span class="text-xs font-medium text-emerald-500">Lorem</span>
       </div>
-      <span class="text-xs font-medium text-gray-700">Lorem</span>
     </div>
   </div>
 </div>
