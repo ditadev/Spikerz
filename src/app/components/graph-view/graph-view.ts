@@ -103,14 +103,49 @@ export class GraphViewComponent implements OnDestroy {
   }
   
   onNodeTouch(node: GraphNode, event: TouchEvent): void {
-    event.preventDefault();
     event.stopPropagation();
     
-    const currentHovered = this.hoveredNode();
-    if (currentHovered?.node.id === node.id) {
-      this.hoveredNode.set(null);
+    const tooltipData = this.getTooltipData(node);
+    
+    let x = (node.x ?? 0) + 50; 
+    let y = (node.y ?? 0) - 80;
+    
+    if ((node.x ?? 0) < 200) {
+      x = (node.x ?? 0) + 50;
+    }
+    
+    if ((node.y ?? 0) < 100) {
+      y = (node.y ?? 0) + 50;
+    }
+    
+    const position = { x, y };
+    this.hoveredNode.set({ node, data: tooltipData, position });
+  }
+  
+  onNodeClick(node: GraphNode, event: MouseEvent): void {
+    event.stopPropagation();
+    
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
+    const isMobile = screenWidth < 768;
+    
+    if (isMobile) {
+      const tooltipData = this.getTooltipData(node);
+      
+      let x = (node.x ?? 0) + 50; 
+      let y = (node.y ?? 0) - 80;
+      
+      if ((node.x ?? 0) < 200) {
+        x = (node.x ?? 0) + 50;
+      }
+      
+      if ((node.y ?? 0) < 100) {
+        y = (node.y ?? 0) + 50;
+      }
+      
+      const position = { x, y };
+      this.hoveredNode.set({ node, data: tooltipData, position });
     } else {
-      this.onNodeHover(node, event as any);
+      this.graphService.selectNode(node, { x: 0, y: 0 });
     }
   }
 
@@ -167,11 +202,6 @@ export class GraphViewComponent implements OnDestroy {
   getNodePosition(nodeId: string): { x: number; y: number } {
     const node = this.nodes().find(n => n.id === nodeId);
     return node ? { x: node.x ?? 0, y: node.y ?? 0 } : { x: 0, y: 0 };
-  }
-
-  onNodeClick(node: GraphNode, event: MouseEvent): void {
-    event.stopPropagation();
-    this.graphService.selectNode(node, { x: 0, y: 0 });
   }
 
   onNodeHover(node: GraphNode, event: MouseEvent): void {
