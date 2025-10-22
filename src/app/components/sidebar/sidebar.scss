@@ -12,7 +12,7 @@
   
   // Menu item colors
   .menu-item {
-    color: #525D73; // Gray for all non-active items
+    color: #525D73; 
     
     mat-icon {
       color: #525D73;
@@ -21,24 +21,12 @@
     span {
       color: #525D73;
     }
-    
-    &-active {
-      color: #000000; // Black for active item
-      
-      mat-icon {
-        color: #000000;
-      }
-      
-      span {
-        color: #000000;
-      }
-    }
   }
   
   .collapse-button {
     position: absolute;
     right: -1rem;
-    top: 3.5rem;  // Lowered further to align with first item
+    top: 3.5rem;  
     width: 2rem;
     height: 2rem;
     background: #00732E;

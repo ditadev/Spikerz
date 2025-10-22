@@ -20,13 +20,13 @@ export class SidebarComponent {
   isCollapsed = signal(false);
 
   menuItems: MenuItem[] = [
-    { icon: 'grid_view', label: 'Lorem' },           // Grid icon
-    { icon: 'warning_amber', label: 'Lorem' },       // Triangle warning
-    { icon: 'folder', label: 'Lorem' },              // Folder
-    { icon: 'zoom_in_map', label: 'Lorem', active: true }, // Zoom in map
-    { icon: 'cable', label: 'Lorem' },            // Cable
-    { icon: 'description', label: 'Lorem' },         // Document/file
-    { icon: 'segment', label: 'Lorem' },              // Segment
+    { icon: 'grid_view', label: 'Lorem' },  
+    { icon: 'warning_amber', label: 'Lorem' },
+    { icon: 'folder', label: 'Lorem' }, 
+    { icon: 'zoom_in_map', label: 'Lorem', active: true }, 
+    { icon: 'cable', label: 'Lorem' }, 
+    { icon: 'description', label: 'Lorem' },
+    { icon: 'segment', label: 'Lorem' }, 
   ];
 
   bottomMenuItems: MenuItem[] = [

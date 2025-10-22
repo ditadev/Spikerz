@@ -43,9 +43,9 @@ export class GraphViewComponent {
   }
 
   private layoutNodes(nodes: GraphNode[]): GraphNode[] {
-    const centerY = 140; // Moved up slightly to make more room for legend
+    const centerY = 140; 
     const spacing = 150;
-    const branchOffset = 90; // Increased spacing between branches
+    const branchOffset = 90; 
     
     const positions = [
       { x: 100, y: centerY },
@@ -75,31 +75,23 @@ export class GraphViewComponent {
     const arrowSpace = 16;
     
     if (edge.source === '3' && (edge.target === '4' || edge.target === '5')) {
-      // Start from node 3's right edge with padding
       const startX = source.x + nodeRadius + 6;
       const startY = source.y;
       
-      // First horizontal segment from node 3
       const firstHorizontalLength = 50;
       const turnX = startX + firstHorizontalLength;
       
-      // Vertical segment position at target's Y level
       const verticalEndY = target.y;
       
-      // Final horizontal segment - LONGER to create more space for labels
-      const finalHorizontalLength = 80; // Increased space before reaching node
+      const finalHorizontalLength = 80;
       const endX = target.x - finalHorizontalLength;
       const endY = target.y;
       
-      // Arrow tip position with padding
       const arrowTipX = target.x - nodeRadius - arrowSpace - 6;
-      
-      // Create path with 90-degree turns
-      // Horizontal from node 3, vertical turn, then LONG horizontal to node 4/5
+
       return `M ${startX},${startY} L ${turnX},${startY} L ${turnX},${endY} L ${arrowTipX},${endY}`;
     }
     
-    // Standard straight edges for other connections
     const dx = target.x - source.x;
     const dy = target.y - source.y;
     const angle = Math.atan2(dy, dx);
@@ -131,16 +123,13 @@ export class GraphViewComponent {
   onNodeHover(node: GraphNode, event: MouseEvent): void {
     const tooltipData = this.getTooltipData(node);
     
-    // Calculate position - adjust based on node position to keep tooltip in frame
     let x = (node.x ?? 0) - 140;
     let y = (node.y ?? 0) - 120;
     
-    // If node is too far left (like node 1), position tooltip to the right instead
     if ((node.x ?? 0) < 200) {
       x = (node.x ?? 0) + 40;
     }
     
-    // If node is too high, position tooltip below instead
     if ((node.y ?? 0) < 140) {
       y = (node.y ?? 0) + 80;
     }

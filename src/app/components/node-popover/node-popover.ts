@@ -56,7 +56,7 @@ export class NodePopoverComponent {
 
   // Donut chart calculations
   getCircumference(): number {
-    const radius = 45;
+    const radius = 50; // Updated to match new radius
     return 2 * Math.PI * radius;
   }
 

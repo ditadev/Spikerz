@@ -4,73 +4,71 @@
 
     <div class="flex gap-5">
       <!-- Left Column: Asset List -->
-      <div class="flex-1 max-w-sm border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
-        <div class="p-8">
-          <!-- Headers -->
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-sm font-semibold text-gray-600">Asset</h3>
-            <h3 class="text-sm font-semibold text-gray-600">Contextual Risk</h3>
+      <div class="flex-1 max-w-sm border border-gray-200 rounded-2xl shadow-sm">
+        <!-- Headers with padding -->
+        <div class="px-8 pt-8 pb-3 border-b border-gray-200">
+          <div class="flex items-center justify-between">
+            <h3 class="font-normal" style="font-size: 0.8125rem; line-height: 1.125rem; letter-spacing: 0.025rem; color: #858D9D;">Asset</h3>
+            <h3 class="font-normal" style="font-size: 0.8125rem; line-height: 1.125rem; letter-spacing: 0.025rem; color: #858D9D;">Contextual Risk</h3>
           </div>
+        </div>
           
-          <!-- Asset Items -->
-          <div class="space-y-3">
-            @for (asset of paginatedAssets; track asset.id) {
-              <div class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <div class="flex items-center gap-3 flex-1 min-w-0">
-                  <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg class="w-7 h-7 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="2" y="6" width="20" height="12" rx="2"/>
-                      <line x1="6" y1="12" x2="6.01" y2="12"/>
-                      <line x1="10" y1="12" x2="10.01" y2="12"/>
-                    </svg>
-                  </div>
-                  <div class="min-w-0 flex-1">
-                    <div class="text-sm font-medium text-gray-900 truncate">{{ asset.name }}</div>
-                    <div class="text-xs text-gray-500">{{ asset.ipAddress }}</div>
-                  </div>
+        <!-- Asset Items with full-width dividers -->
+        <div class="divide-y divide-gray-200">
+          @for (asset of paginatedAssets; track asset.id) {
+            <div class="flex items-center justify-between px-8 py-3 hover:bg-gray-50 transition-colors">
+              <div class="flex items-center gap-3 flex-1 min-w-0">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg class="w-7 h-7 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="6" width="20" height="12" rx="2"/>
+                    <line x1="6" y1="12" x2="6.01" y2="12"/>
+                    <line x1="10" y1="12" x2="10.01" y2="12"/>
+                  </svg>
                 </div>
-                <span [ngClass]="{
-                  'bg-red-100 text-red-600': asset.riskLevel === 'Critical',
-                  'bg-orange-100 text-orange-600': asset.riskLevel === 'High',
-                  'bg-yellow-100 text-yellow-600': asset.riskLevel === 'Medium',
-                  'bg-emerald-100 text-emerald-600': asset.riskLevel === 'Low'
-                }" class="px-4 py-1 text-xs font-semibold rounded-full ml-3 whitespace-nowrap">
-                  {{ asset.riskLevel }}
-                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="text-sm font-medium text-gray-900 truncate">{{ asset.name }}</div>
+                  <div class="text-xs text-gray-500">{{ asset.ipAddress }}</div>
+                </div>
               </div>
-            }
-          </div>
+              <span [ngClass]="{
+                'bg-red-100 text-red-600': asset.riskLevel === 'Critical',
+                'bg-orange-100 text-orange-600': asset.riskLevel === 'High',
+                'bg-yellow-100 text-yellow-600': asset.riskLevel === 'Medium',
+                'bg-emerald-100 text-emerald-600': asset.riskLevel === 'Low'
+              }" class="px-4 py-1 text-xs font-semibold rounded-full ml-3 whitespace-nowrap">
+                {{ asset.riskLevel }}
+              </span>
+            </div>
+          }
+        </div>
 
-          <!-- Pagination -->
-          <div class="flex items-center justify-center gap-4 text-sm text-gray-600 pt-6 mt-6 border-t border-gray-100">
-            <button 
-              (click)="prevPage()"
-              [disabled]="currentPage() === 1"
-              [class.opacity-30]="currentPage() === 1"
-              [class.cursor-not-allowed]="currentPage() === 1"
-              class="hover:text-gray-900 transition-colors text-xl font-light"
-            >
-              ‹
-            </button>
-            <span class="text-xs">
-              Showing {{ (currentPage() - 1) * pageSize + 1 }}-{{ Math.min(currentPage() * pageSize, popoverData()!.details.assets.length) }} of {{ popoverData()!.details.assets.length }}
-            </span>
-            <button 
-              (click)="nextPage()"
-              [disabled]="currentPage() === totalPages"
-              [class.opacity-30]="currentPage() === totalPages"
-              [class.cursor-not-allowed]="currentPage() === totalPages"
-              class="hover:text-gray-900 transition-colors text-xl font-light"
-            >
-              ›
-            </button>
-          </div>
+        <!-- Pagination -->
+        <div class="flex items-center justify-center gap-4 text-sm text-gray-600 px-8 py-3 border-t border-gray-200">
+          <button 
+            (click)="prevPage()"
+            [disabled]="currentPage() === 1"
+            [class.opacity-30]="currentPage() === 1"
+            [class.cursor-not-allowed]="currentPage() === 1"
+            class="hover:text-gray-900 transition-colors text-xl font-light">
+            ‹
+          </button>
+          <span class="text-xs">
+            Showing {{ (currentPage() - 1) * pageSize + 1 }}-{{ Math.min(currentPage() * pageSize, popoverData()!.details.assets.length) }} of {{ popoverData()!.details.assets.length }}
+          </span>
+          <button 
+            (click)="nextPage()"
+            [disabled]="currentPage() === totalPages"
+            [class.opacity-30]="currentPage() === totalPages"
+            [class.cursor-not-allowed]="currentPage() === totalPages"
+            class="hover:text-gray-900 transition-colors text-xl font-light">
+            ›
+          </button>
         </div>
       </div>
 
       <!-- Right Column: Risk Summary -->
       <div class="flex-1 max-w-sm border border-gray-200 rounded-2xl p-8 shadow-sm">
-        <h3 class="text-sm font-semibold text-gray-600 mb-6">Contextual Risk</h3>
+        <h3 class="font-normal mb-6" style="font-size: 0.8125rem; line-height: 1.125rem; letter-spacing: 0.025rem; color: #858D9D;">Contextual Risk</h3>
         
         <!-- Flex container with flex-row to force horizontal layout -->
         <div class="flex flex-row items-start gap-6">
@@ -78,19 +76,27 @@
           <div class="space-y-3 flex-shrink-0">
             <div class="flex items-center gap-3">
               <div class="w-3 h-3 rounded-full bg-red-500 flex-shrink-0"></div>
-              <span class="text-sm text-gray-700 whitespace-nowrap">{{ popoverData()!.details.riskSummary.critical }} Critical</span>
+              <span class="font-normal" style="font-size: 0.9375rem; line-height: 1; color: #383874;">
+                <span class="font-bold">{{ popoverData()!.details.riskSummary.critical }}</span> Critical
+              </span>
             </div>
             <div class="flex items-center gap-3">
               <div class="w-3 h-3 rounded-full bg-orange-500 flex-shrink-0"></div>
-              <span class="text-sm text-gray-700 whitespace-nowrap">{{ popoverData()!.details.riskSummary.high }} High</span>
+              <span class="font-normal" style="font-size: 0.9375rem; line-height: 1; color: #383874;">
+                <span class="font-bold">{{ popoverData()!.details.riskSummary.high }}</span> High
+              </span>
             </div>
             <div class="flex items-center gap-3">
               <div class="w-3 h-3 rounded-full bg-yellow-500 flex-shrink-0"></div>
-              <span class="text-sm text-gray-700 whitespace-nowrap">{{ popoverData()!.details.riskSummary.medium }} Medium</span>
+              <span class="font-normal" style="font-size: 0.9375rem; line-height: 1; color: #383874;">
+                <span class="font-bold">{{ popoverData()!.details.riskSummary.medium }}</span> Medium
+              </span>
             </div>
             <div class="flex items-center gap-3">
               <div class="w-3 h-3 rounded-full bg-emerald-500 flex-shrink-0"></div>
-              <span class="text-sm text-gray-700 whitespace-nowrap">{{ popoverData()!.details.riskSummary.low }} Low</span>
+              <span class="font-normal" style="font-size: 0.9375rem; line-height: 1; color: #383874;">
+                <span class="font-bold">{{ popoverData()!.details.riskSummary.low }}</span> Low
+              </span>
             </div>
           </div>
 
@@ -102,20 +108,20 @@
                 <circle
                   cx="60"
                   cy="60"
-                  r="45"
+                  r="50"
                   fill="none"
                   stroke="#F3F4F6"
-                  stroke-width="14"
+                  stroke-width="10"
                 />
                 
                 <!-- Animated critical risk circle -->
                 <circle
                   cx="60"
                   cy="60"
-                  r="45"
+                  r="50"
                   fill="none"
-                  stroke="#EF4444"
-                  stroke-width="14"
+                  stroke="#C6190D"
+                  stroke-width="10"
                   [attr.stroke-dasharray]="getCircumference()"
                   [attr.stroke-dashoffset]="getDashOffset()"
                   stroke-linecap="round"
@@ -125,7 +131,7 @@
               
               <!-- Center number -->
               <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <span class="text-3xl font-bold text-gray-900">{{ popoverData()!.details.riskSummary.critical }}</span>
+                <span class="font-semibold text-center" style="font-size: 2.1875rem; line-height: 1.75rem; color: #656575;">{{ popoverData()!.details.riskSummary.critical }}</span>
               </div>
             </div>
           </div>
