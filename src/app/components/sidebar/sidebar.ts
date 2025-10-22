@@ -22,15 +22,15 @@ export class SidebarComponent {
   menuItems: MenuItem[] = [
     { icon: 'grid_view', label: 'Lorem' },           // Grid icon
     { icon: 'warning_amber', label: 'Lorem' },       // Triangle warning
-    { icon: 'description', label: 'Lorem' },         // Document/file
-    { icon: 'gps_fixed', label: 'Lorem', active: true }, // Target/crosshair
-    { icon: 'settings', label: 'Lorem' },            // Settings gear
     { icon: 'folder', label: 'Lorem' },              // Folder
-    { icon: 'layers', label: 'Lorem' },              // Layers/stacked
+    { icon: 'zoom_in_map', label: 'Lorem', active: true }, // Zoom in map
+    { icon: 'cable', label: 'Lorem' },            // Cable
+    { icon: 'description', label: 'Lorem' },         // Document/file
+    { icon: 'segment', label: 'Lorem' },              // Segment
   ];
 
   bottomMenuItems: MenuItem[] = [
-    { icon: 'star', label: 'Lorem' },
+    { icon: 'settings', label: 'Lorem' },
     { icon: 'shield', label: 'Lorem' },
   ];
 
