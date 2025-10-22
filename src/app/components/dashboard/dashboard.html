@@ -1,95 +1,170 @@
 <div class="flex h-screen bg-gray-50">
-  <!-- Sidebar -->
   <app-sidebar></app-sidebar>
 
-  <!-- Main Content Area -->
-  <div class="flex flex-col lg:flex-row gap-8 flex-1 p-4 md:p-8 overflow-hidden">
+  <div class="flex flex-col lg:flex-row gap-4 md:gap-8 flex-1 overflow-auto">
     
-    <!-- Left Column: Description -->
-    <app-card [padding]="'lg'" class="flex-1 lg:max-w-none overflow-y-auto">
-      <div class="space-y-8">
-        <!-- Description Section -->
-        <section>
-          <h2 class="text-xl font-semibold text-emerald-600 mb-4">Description</h2>
-          <p class="text-sm text-gray-700 leading-relaxed">
-            Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et Magna Faucibus. Dui Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce Senectus Facilisis Non Diam Leo Nulla Sem Pellentesque. Sit In Vel Sed Cursus Metus Sit Fringilla Vestibulum.
-          </p>
-        </section>
+    <!-- Mobile: Single Column Layout -->
+    <div class="flex flex-col gap-4 md:gap-5 p-4 md:p-8 lg:hidden w-full">
+      
+      <app-card [padding]="'lg'">
+        <div class="space-y-6">
+          <section>
+            <h2 class="text-lg font-semibold text-emerald-600 mb-3">Description</h2>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et Magna Faucibus. Dui Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce Senectus Facilisis Non Diam Leo Nulla Sem Pellentesque. Sit In Vel Sed Cursus Metus Sit Fringilla Vestibulum.
+            </p>
+          </section>
 
-        <!-- Extra Section -->
-        <section>
-          <h2 class="text-xl font-semibold text-emerald-600 mb-4">Extra</h2>
-          <p class="text-sm text-gray-700 leading-relaxed mb-6">
-            Lorem ipsum dolor sit amet consectetur. Tempus a id adipiscing fames egestas tellus dis pretium tempus. Justo nisl nisl lorem lectus id ornare. Rhoncus in egestas in amet porttitor pellentesque sit. Amet gravida integer velit felis. Eu consectetur interdum auctor sed aliquam. Eu pulvinar arcu sed id. Duis a aliquem eu quisque commodo lectus. Lectus ipsum velit purus viverra vulputate viverra in nunc nulla. Euismod rhoncus mauris urna orci gravida sagittis netus. Amet mus in vel etiam. Interdum habitant congue massa in etiam sit. Commodo nibh viverra lobortis augue lorem quam lorem suspendisse.
-          </p>
+          <section>
+            <h2 class="text-lg font-semibold text-emerald-600 mb-3">Extra</h2>
+            <p class="text-sm text-gray-700 leading-relaxed mb-4">
+              Lorem ipsum dolor sit amet consectetur. Tempus a id adipiscing fames egestas tellus dis pretium tempus. Justo nisl nisl lorem lectus id ornare. Rhoncus in egestas in amet porttitor pellentesque sit. Amet gravida integer velit felis. Eu consectetur interdum auctor sed aliquam. Eu pulvinar arcu sed id. Duis a aliquem eu quisque commodo lectus. Lectus ipsum velit purus viverra vulputate viverra in nunc nulla. Euismod rhoncus mauris urna orci gravida sagittis netus. Amet mus in vel etiam. Interdum habitant congue massa in etiam sit. Commodo nibh viverra lobortis augue lorem quam lorem suspendisse.
+            </p>
 
-          <!-- Metadata Table -->
-          <div class="border-t border-b border-gray-200 py-3">
-            <div class="flex justify-between py-2">
-              <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
-              <span class="text-sm text-gray-900">10/19/2017</span>
-            </div>
-            <div class="flex justify-between py-2">
-              <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
-              <span class="text-sm text-gray-900">Ut</span>
-            </div>
-            <div class="flex justify-between py-2">
-              <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
-              <span class="text-sm text-gray-900">Eros</span>
-            </div>
-            <div class="flex justify-between py-2">
-              <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
-              <div class="flex items-center gap-2">
-                <mat-icon class="text-emerald-500 text-base">check</mat-icon>
-                <span class="text-sm text-gray-900">Yes</span>
+            <div class="border-t border-b border-gray-200 py-2">
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0 text-sm">Lorem Ipsum Dolor</span>
+                <span class="text-sm text-gray-900">10/19/2017</span>
+              </div>
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0 text-sm">Lorem Ipsum Dolor</span>
+                <span class="text-sm text-gray-900">Ut</span>
+              </div>
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0 text-sm">Lorem Ipsum Dolor</span>
+                <span class="text-sm text-gray-900">Eros</span>
+              </div>
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0 text-sm">Lorem Ipsum Dolor</span>
+                <div class="flex items-center gap-2">
+                  <mat-icon class="text-emerald-500 text-base">check</mat-icon>
+                  <span class="text-sm text-gray-900">Yes</span>
+                </div>
+              </div>
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0 text-sm">Lorem Ipsum Dolor</span>
+                <span class="text-sm text-gray-900">Sit</span>
+              </div>
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0 text-sm">Lorem Ipsum Dolor</span>
+                <span class="text-sm text-gray-900">Lorem Ipsum Dolor</span>
+              </div>
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0 text-sm">Lorem Ipsum Dolor</span>
+                <span class="text-sm text-gray-900">Lorem Ipsum Dolor</span>
               </div>
             </div>
-            <div class="flex justify-between py-2">
-              <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
-              <span class="text-sm text-gray-900">Sit</span>
-            </div>
-            <div class="flex justify-between py-2">
-              <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
-              <span class="text-sm text-gray-900">Lorem Ipsum Dolor</span>
-            </div>
-            <div class="flex justify-between py-2">
-              <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
-              <span class="text-sm text-gray-900">Lorem Ipsum Dolor</span>
-            </div>
-          </div>
-        </section>
+          </section>
 
-        <!-- Collapsible Cards Section -->
-        <section>
-          <h2 class="font-bold text-gray-900 mb-4" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor Sit</h2>
-          <app-collapsible-cards></app-collapsible-cards>
-        </section>
-      </div>
-    </app-card>
-
-    <!-- Right Column: Graph & Assets -->
-    <div class="w-full lg:max-w-3xl flex flex-col gap-5 overflow-y-auto">
-      
-      <!-- Graph Section with title inside -->
-      <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
-        <!-- Title in white area -->
-        <div class="px-6 py-4">
-          <h2 class="text-xl font-bold text-emerald-600">Lorem Lorem Lorem</h2>
+          <section>
+            <h2 class="font-bold text-gray-900 mb-3 text-sm">Lorem Ipsum Dolor Sit</h2>
+            <app-collapsible-cards></app-collapsible-cards>
+          </section>
         </div>
-        <!-- Graph with gray background -->
-        <div>
+      </app-card>
+
+      <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div class="px-4 py-3">
+          <h2 class="text-lg font-bold text-emerald-600">Lorem Lorem Lorem</h2>
+        </div>
+        
+        <div class="bg-gray-50 mx-3 mb-3 rounded-xl p-3 overflow-hidden">
           @if (graphService.isLoading()) {
-            <div class="flex items-center justify-center bg-gray-50" style="height: 24rem;">
+            <div class="flex items-center justify-center h-64">
               <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
             </div>
           } @else {
             <app-graph-view />
           }
         </div>
-      </div>
 
-      <!-- Assets & Risk Section -->
-      <app-node-popover />
+        <div class="px-4 pb-4">
+          <app-node-popover />
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop: Two Column Layout -->
+    <div class="hidden lg:flex lg:flex-row gap-8 flex-1 p-8 overflow-hidden w-full">
+      
+      <app-card [padding]="'lg'" class="w-full lg:w-[30%] overflow-y-auto flex-shrink-0">
+        <div class="space-y-8">
+          <section>
+            <h2 class="text-xl font-semibold text-emerald-600 mb-4">Description</h2>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et Magna Faucibus. Dui Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce Senectus Facilisis Non Diam Leo Nulla Sem Pellentesque. Sit In Vel Sed Cursus Metus Sit Fringilla Vestibulum.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="text-xl font-semibold text-emerald-600 mb-4">Extra</h2>
+            <p class="text-sm text-gray-700 leading-relaxed mb-6">
+              Lorem ipsum dolor sit amet consectetur. Tempus a id adipiscing fames egestas tellus dis pretium tempus. Justo nisl nisl lorem lectus id ornare. Rhoncus in egestas in amet porttitor pellentesque sit. Amet gravida integer velit felis. Eu consectetur interdum auctor sed aliquam. Eu pulvinar arcu sed id. Duis a aliquem eu quisque commodo lectus. Lectus ipsum velit purus viverra vulputate viverra in nunc nulla. Euismod rhoncus mauris urna orci gravida sagittis netus. Amet mus in vel etiam. Interdum habitant congue massa in etiam sit. Commodo nibh viverra lobortis augue lorem quam lorem suspendisse.
+            </p>
+
+            <div class="border-t border-b border-gray-200 py-3">
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
+                <span class="text-sm text-gray-900">10/19/2017</span>
+              </div>
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
+                <span class="text-sm text-gray-900">Ut</span>
+              </div>
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
+                <span class="text-sm text-gray-900">Eros</span>
+              </div>
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
+                <div class="flex items-center gap-2">
+                  <mat-icon class="text-emerald-500 text-base">check</mat-icon>
+                  <span class="text-sm text-gray-900">Yes</span>
+                </div>
+              </div>
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
+                <span class="text-sm text-gray-900">Sit</span>
+              </div>
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
+                <span class="text-sm text-gray-900">Lorem Ipsum Dolor</span>
+              </div>
+              <div class="flex py-2 gap-4">
+                <span class="font-bold text-gray-700 flex-shrink-0" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor</span>
+                <span class="text-sm text-gray-900">Lorem Ipsum Dolor</span>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="font-bold text-gray-900 mb-4" style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">Lorem Ipsum Dolor Sit</h2>
+            <app-collapsible-cards></app-collapsible-cards>
+          </section>
+        </div>
+      </app-card>
+
+      <app-card [padding]="'lg'" class="flex-1 overflow-y-auto">
+        <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+          <div class="px-6 ">
+            <h2 class="text-xl font-bold text-emerald-600">Lorem Lorem Lorem</h2>
+          </div>
+          
+          <div class="bg-gray-50 mx-4 mb-4 rounded-xl p-4 overflow-x-auto">
+            @if (graphService.isLoading()) {
+              <div class="flex items-center justify-center" style="height: 24rem;">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+              </div>
+            } @else {
+              <app-graph-view />
+            }
+          </div>
+
+          <div class="px-4 pb-6">
+            <app-node-popover />
+          </div>
+        </div>
+      </app-card>
     </div>
   </div>
 </div>

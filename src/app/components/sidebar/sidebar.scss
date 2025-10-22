@@ -1,98 +1,170 @@
 // Sidebar Styles
 
 .sidebar {
+  &-expanded {
+    width: var(--sidebar-width, 15rem);
+  }
+  
+  &-collapsed {
+    width: var(--sidebar-collapsed-width, 4rem);
+    
+    nav {
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
     &-expanded {
-      width: var(--sidebar-width, 15rem);
+      width: 50vw;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0.125rem 0 0.5rem rgba(0, 0, 0, 0.1);
     }
     
     &-collapsed {
-      width: var(--sidebar-collapsed-width, 4rem);
+      width: 0;
+      border: none;
+      overflow: hidden;
     }
   }
-  
-  // Menu item colors
-  .menu-item {
-    color: #525D73; 
-    
-    mat-icon {
-      color: #525D73;
-    }
-    
-    span {
-      color: #525D73;
+
+  @media (max-width: 640px) {
+    &-expanded {
+      width: 50vw;
+      min-width: 200px;
     }
   }
+}
+
+// Menu item colors
+.menu-item {
+  color: #525D73; 
   
-  .collapse-button {
+  mat-icon {
+    color: #525D73;
+  }
+  
+  span {
+    color: #525D73;
+  }
+}
+
+.collapse-button {
+  position: absolute;
+  right: -1rem;
+  top: calc(3.5rem - 8px);
+  width: 2rem;
+  height: 2rem;
+  background: #00732E;
+  border: 0.1875rem solid #F0F1F3;
+  border-radius: 50%;
+  box-shadow: 0 0.0625rem 0.25rem rgba(12, 12, 13, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  
+  &:hover {
+    background: #005a24;
+  }
+  
+  mat-icon {
+    color: white;
+  }
+
+  @media (max-width: 640px) {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+// Mobile-specific collapse button positioning
+@media (max-width: 768px) {
+  .sidebar-collapsed .collapse-button {
+    position: fixed;
+    left: 0;
+    right: auto;
+  }
+  
+  .sidebar-expanded .collapse-button {
     position: absolute;
-    right: -1rem;
-    top: 3.5rem;  
-    width: 2rem;
-    height: 2rem;
-    background: #00732E;
-    border: 0.1875rem solid #F0F1F3;
-    border-radius: 50%;
-    box-shadow: 0 0.0625rem 0.25rem rgba(12, 12, 13, 0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    right: 0;
+    left: auto;
+    transform: translateX(50%);
+  }
+}
+
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+// Icon styling
+:host ::ng-deep svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+// Scrollbar styling
+nav {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
+  
+  &::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.3);
+    border-radius: 0.25rem;
     
     &:hover {
-      background: #005a24;
+      background-color: rgba(156, 163, 175, 0.5);
     }
-    
-    mat-icon {
-      color: white;
-    }
+  }
+}
+
+// Tooltip animation
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+
+// Button hover effects and prevent wrapping
+button {
+  white-space: nowrap;
+  
+  &:hover {
+    transform: translateX(0.0625rem);
   }
   
-  .transition-all {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
+  &:active {
+    transform: scale(0.98);
   }
   
-  // Icon styling
-  :host ::ng-deep svg {
-    display: inline-block;
-    vertical-align: middle;
+  img {
+    flex-shrink: 0;
   }
-  
-  // Scrollbar styling
-  nav {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
-    
-    &::-webkit-scrollbar {
-      width: 0.25rem;
-    }
-    
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    
-    &::-webkit-scrollbar-thumb {
-      background-color: rgba(156, 163, 175, 0.3);
-      border-radius: 0.25rem;
-      
-      &:hover {
-        background-color: rgba(156, 163, 175, 0.5);
-      }
-    }
+}
+
+// Mobile overlay when sidebar is open
+@media (max-width: 768px) {
+  .sidebar-expanded::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 50vw;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 40;
   }
-  
-  // Tooltip animation
-  .group:hover .group-hover\:opacity-100 {
-    opacity: 1;
-  }
-  
-  // Button hover effects
-  button {
-    &:hover {
-      transform: translateX(0.0625rem);
-    }
-    
-    &:active {
-      transform: scale(0.98);
-    }
-  }
+}

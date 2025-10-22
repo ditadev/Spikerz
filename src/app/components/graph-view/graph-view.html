@@ -1,160 +1,198 @@
 <div class="relative w-full graph-container">
-  <svg 
-    #svgCanvas
-    class="w-full h-full"
-    viewBox="0 0 727 307"
-    preserveAspectRatio="xMidYMid meet"
-    (click)="onCanvasClick($event)">
-    
-    <!-- Define arrow markers -->
-    <defs>
-      <marker
-        id="arrowhead"
-        markerWidth="6"
-        markerHeight="6"
-        refX="5.5"
-        refY="3"
-        orient="auto"
-        markerUnits="strokeWidth">
-        <path
-          d="M 0 0 L 6 3 L 0 6 z"
-          fill="#94A3B8"
-        />
-      </marker>
-      
-      <marker
-        id="arrowhead-animated"
-        markerWidth="6"
-        markerHeight="6"
-        refX="5.5"
-        refY="3"
-        orient="auto"
-        markerUnits="strokeWidth">
-        <path
-          d="M 0 0 L 6 3 L 0 6 z"
-          fill="#94A3B8"
-        />
-      </marker>
-    </defs>
-
-    <!-- Render edges -->
-    <g class="edges">
-      @for (edge of edges(); track edge.source + edge.target) {
-        <path
-          [attr.d]="getEdgePath(edge)"
-          stroke="#94A3B8"
-          stroke-width="0.75"
-          fill="none"
-          [attr.marker-end]="'url(#arrowhead)'"
-          [attr.stroke-dasharray]="edge.animated ? '4,2' : 'none'"
-          [class.animated-edge]="edge.animated"
-        />
-      }
-    </g>
-
-    <!-- Render nodes -->
-    <g class="nodes">
-      @for (node of nodes(); track node.id) {
-        <g 
-          class="node-group cursor-pointer"
-          [attr.transform]="'translate(' + node.x + ',' + node.y + ')'"
-          (click)="onNodeClick(node, $event)"
-          (mouseenter)="onNodeHover(node, $event)"
-          (mouseleave)="onNodeLeave()">
-          
-          <!-- Node circle -->
-          @if (node.id === '1') {
-            <circle
-              r="24"
-              fill="#FEE2E2"
-              class="node-circle transition-all duration-200"
+  <div class="w-full h-full overflow-x-auto overflow-y-hidden lg:overflow-visible px-4 md:px-6">
+    <div class="min-w-[727px] lg:min-w-0 lg:w-full lg:h-full">
+      <svg 
+        #svgCanvas
+        class="w-full"
+        style="height: calc(100% - 80px);"
+        viewBox="0 0 727 307"
+        preserveAspectRatio="xMidYMid meet"
+        (click)="onCanvasClick($event)">
+        
+        <!-- Define arrow markers -->
+        <defs>
+          <marker
+            id="arrowhead"
+            markerWidth="10"
+            markerHeight="10"
+            refX="9"
+            refY="5"
+            orient="auto">
+            <path
+              d="M 0 0 L 10 5 L 0 10 z"
+              fill="#94A3B8"
             />
-          } @else {
-            <!-- Light blue circle for server nodes -->
-            <circle
-              r="24"
-              fill="#DBEAFE"
-              class="node-circle transition-all duration-200"
+          </marker>
+          
+          <marker
+            id="arrowhead-branch"
+            markerWidth="10"
+            markerHeight="10"
+            refX="9"
+            refY="5"
+            orient="auto">
+            <path
+              d="M 0 0 L 10 5 L 0 10 z"
+              fill="#858D9D"
             />
-          }
-          
-          <!-- Node icon -->
-          <g>
-            @if (node.id === '1') {
-              <!-- Red send icon for node 1 -->
-              <svg x="-14" y="-14" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pointer-events-none">
-                <line x1="22" y1="2" x2="11" y2="13"/>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-              </svg>
-            } @else {
-              <!-- Server icon in blue -->
-              <svg x="-14" y="-14" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pointer-events-none">
-                <rect x="2" y="6" width="20" height="12" rx="2"/>
-                <line x1="6" y1="12" x2="6.01" y2="12"/>
-                <line x1="10" y1="12" x2="10.01" y2="12"/>
-              </svg>
-            }
-          </g>
-          
-          <!-- Badge for critical items -->
-          @if (node.badge) {
-            @if (node.id === '1') {
-              <!-- Indigo profile badge for node 1 -->
-              <circle
-                cx="18"
-                cy="-18"
-                r="12"
-                fill="#6366F1"
-                class="badge-circle"
+          </marker>
+        </defs>
+
+        <!-- Render edges -->
+        <g class="edges">
+          @for (edge of edges(); track edge.source + edge.target) {
+            @if (edge.source === '1' && edge.target === '2') {
+              <!-- Arrow from node 1 to node 2 using SVG image -->
+              <image 
+                [attr.href]="'assets/icons/arrow.svg'"
+                [attr.x]="getNodePosition(edge.source).x + 32"
+                [attr.y]="getNodePosition(edge.source).y - 1.5"
+                [attr.width]="getNodePosition(edge.target).x - getNodePosition(edge.source).x - 64"
+                height="3"
+                preserveAspectRatio="none"
               />
-              <!-- Profile/person icon -->
-              <svg x="10" y="-26" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" class="pointer-events-none">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-              </svg>
-            } @else {
-              <!-- Red shield with X for other nodes -->
-              <circle
-                cx="18"
-                cy="-18"
-                r="12"
-                fill="#EF4444"
-                class="badge-circle"
+            } @else if (edge.source === '2' && edge.target === '3') {
+              <!-- Arrow from node 2 to node 3 using SVG image -->
+              <image 
+                [attr.href]="'assets/icons/arrow.svg'"
+                [attr.x]="getNodePosition(edge.source).x + 32"
+                [attr.y]="getNodePosition(edge.source).y - 1.5"
+                [attr.width]="getNodePosition(edge.target).x - getNodePosition(edge.source).x - 64"
+                height="3"
+                preserveAspectRatio="none"
               />
-              <!-- Shield with X icon -->
-              <svg x="10" y="-26" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" class="pointer-events-none">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <line x1="9" y1="9" x2="15" y2="15"/>
-                <line x1="15" y1="9" x2="9" y2="15"/>
-              </svg>
+            } @else if (edge.source === '3' && edge.target === '4') {
+              <!-- Upper branch: node 3 to node 4 -->
+              <path
+                [attr.d]="getBranchPath(edge, 'up')"
+                stroke="#858D9D"
+                stroke-width="0.75"
+                fill="none"
+                marker-end="url(#arrowhead-branch)"
+                stroke-linejoin="round"
+              />
+            } @else if (edge.source === '3' && edge.target === '5') {
+              <!-- Lower branch: node 3 to node 5 -->
+              <path
+                [attr.d]="getBranchPath(edge, 'down')"
+                stroke="#858D9D"
+                stroke-width="0.75"
+                fill="none"
+                marker-end="url(#arrowhead-branch)"
+                stroke-linejoin="round"
+              />
             }
-          }
-          
-          <!-- Node label -->
-          <text
-            y="45"
-            text-anchor="middle"
-            class="fill-gray-700 font-medium pointer-events-none select-none"
-            style="font-size: 13px;"
-          >
-            {{ node.label }}
-          </text>
-          
-          <!-- Node sublabel (IP address) -->
-          @if (node.sublabel) {
-            <text
-              y="60"
-              text-anchor="middle"
-              class="fill-gray-500 pointer-events-none select-none"
-              style="font-size: 11px;"
-            >
-              {{ node.sublabel }}
-            </text>
           }
         </g>
-      }
-    </g>
-  </svg>
+
+        <!-- Render nodes -->
+        <g class="nodes">
+          @for (node of nodes(); track node.id) {
+            <g 
+              class="node-group cursor-pointer"
+              [attr.transform]="'translate(' + node.x + ',' + node.y + ')'"
+              (click)="onNodeClick(node, $event)"
+              (mouseenter)="onNodeHover(node, $event)"
+              (mouseleave)="onNodeLeave()">
+              
+              <!-- Node circle -->
+              @if (node.id === '1') {
+                <circle
+                  r="24"
+                  fill="#FEE2E2"
+                  class="node-circle transition-all duration-200"
+                />
+              } @else {
+                <!-- Light blue circle for server nodes -->
+                <circle
+                  r="24"
+                  fill="#DBEAFE"
+                  class="node-circle transition-all duration-200"
+                />
+              }
+              
+              <!-- Node icon -->
+              <g>
+                @if (node.id === '1') {
+                  <!-- Node 1 icon -->
+                  <image 
+                    [attr.href]="'assets/icons/node1.svg'" 
+                    x="-16" 
+                    y="-16" 
+                    width="32" 
+                    height="32"
+                    class="pointer-events-none"
+                  />
+                } @else {
+                  <!-- Other nodes icon -->
+                  <image 
+                    [attr.href]="'assets/icons/other-nodes.svg'" 
+                    x="-16" 
+                    y="-16" 
+                    width="32" 
+                    height="32"
+                    class="pointer-events-none"
+                  />
+                }
+              </g>
+              
+              <!-- Badge for critical items -->
+              @if (node.badge) {
+                @if (node.id === '1') {
+                  <!-- Node 1 notification badge -->
+                  <image 
+                    [attr.href]="'assets/icons/node1-notification.svg'" 
+                    x="6" 
+                    y="-30" 
+                    width="24" 
+                    height="24"
+                    class="pointer-events-none"
+                  />
+                } @else {
+                  <!-- Red shield with X for other nodes -->
+                  <circle
+                    cx="18"
+                    cy="-18"
+                    r="12"
+                    fill="#EF4444"
+                    class="badge-circle"
+                  />
+                  <!-- Shield with X icon -->
+                  <svg x="10" y="-26" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" class="pointer-events-none">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <line x1="9" y1="9" x2="15" y2="15"/>
+                    <line x1="15" y1="9" x2="9" y2="15"/>
+                  </svg>
+                }
+              }
+              
+              <!-- Node label -->
+              <text
+                y="45"
+                text-anchor="middle"
+                class="fill-gray-700 font-medium pointer-events-none select-none"
+                style="font-size: 13px;"
+              >
+                {{ node.label }}
+              </text>
+              
+              <!-- Node sublabel (IP address) -->
+              @if (node.sublabel) {
+                <text
+                  y="60"
+                  text-anchor="middle"
+                  class="fill-gray-500 pointer-events-none select-none"
+                  style="font-size: 11px;"
+                >
+                  {{ node.sublabel }}
+                </text>
+              }
+            </g>
+          }
+        </g>
+      </svg>
+    </div>
+  </div>
 
   <!-- Tooltip -->
   @if (hoveredNode()) {
@@ -164,38 +202,43 @@
     </app-node-tooltip>
   }
 
+  <!-- Divider -->
+  <div class="absolute bottom-16 left-0 right-0 px-4 md:px-6">
+    <div class="border-t border-gray-200"></div>
+  </div>
+
   <!-- Legend at bottom -->
-  <div class="absolute bottom-0 left-0 right-0 px-6 py-4">
-    <div class="flex items-center gap-4">
+  <div class="absolute bottom-0 left-0 right-0 px-4 md:px-6 py-4">
+    <div class="flex items-center gap-3 md:gap-4 flex-wrap">
       <div class="flex items-center gap-2">
-        <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-          <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div class="w-5 h-5 md:w-6 md:h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+          <svg class="w-3 h-3 md:w-4 md:h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             <line x1="9" y1="9" x2="15" y2="15"/>
             <line x1="15" y1="9" x2="9" y2="15"/>
           </svg>
         </div>
-        <span class="text-xs font-medium text-red-500">Lorem</span>
+        <span class="text-xs font-medium text-red-500 whitespace-nowrap">Lorem</span>
       </div>
       <div class="flex items-center gap-2">
-        <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center">
-          <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div class="w-5 h-5 md:w-6 md:h-6 bg-yellow-500 rounded-full flex items-center justify-center flex-shrink-0">
+          <svg class="w-3 h-3 md:w-4 md:h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             <line x1="9" y1="9" x2="15" y2="15"/>
             <line x1="15" y1="9" x2="9" y2="15"/>
           </svg>
         </div>
-        <span class="text-xs font-medium text-yellow-500">Lorem</span>
+        <span class="text-xs font-medium text-yellow-500 whitespace-nowrap">Lorem</span>
       </div>
       <div class="flex items-center gap-2">
-        <div class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
-          <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div class="w-5 h-5 md:w-6 md:h-6 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+          <svg class="w-3 h-3 md:w-4 md:h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             <line x1="9" y1="9" x2="15" y2="15"/>
             <line x1="15" y1="9" x2="9" y2="15"/>
           </svg>
         </div>
-        <span class="text-xs font-medium text-emerald-500">Lorem</span>
+        <span class="text-xs font-medium text-emerald-500 whitespace-nowrap">Lorem</span>
       </div>
     </div>
   </div>

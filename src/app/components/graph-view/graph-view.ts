@@ -1,4 +1,4 @@
-import { Component, inject, signal, effect, ViewChild, ElementRef } from '@angular/core';
+import { Component, inject, signal, effect, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GraphDataService } from '../../services/graph-data.service';
 import { GraphNode, GraphEdge } from '../../models/graph.model';
@@ -22,7 +22,7 @@ export interface NodeTooltipData {
   templateUrl: './graph-view.html',
   styleUrls: ['./graph-view.scss']
 })
-export class GraphViewComponent {
+export class GraphViewComponent implements OnDestroy {
   @ViewChild('svgCanvas', { static: false }) svgCanvas?: ElementRef<SVGSVGElement>;
   
   private readonly graphService: GraphDataService = inject(GraphDataService);
@@ -30,6 +30,8 @@ export class GraphViewComponent {
   nodes = signal<GraphNode[]>([]);
   edges = signal<GraphEdge[]>([]);
   hoveredNode = signal<{ node: GraphNode; data: NodeTooltipData; position: { x: number; y: number } } | null>(null);
+  
+  private resizeHandler: (() => void) | null = null;
 
   constructor() {
     effect(() => {
@@ -40,79 +42,102 @@ export class GraphViewComponent {
         this.edges.set(data.edges);
       }
     });
+    
+    // Listen for window resize
+    if (typeof window !== 'undefined') {
+      this.resizeHandler = () => this.onResize();
+      window.addEventListener('resize', this.resizeHandler);
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.resizeHandler && typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.resizeHandler);
+    }
   }
 
   private layoutNodes(nodes: GraphNode[]): GraphNode[] {
-    const centerY = 140; 
-    const spacing = 150;
-    const branchOffset = 90; 
+    const centerY = 140;
+    
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
+    const isLargeScreen = screenWidth >= 1024;
+    const isMediumScreen = screenWidth >= 768 && screenWidth < 1024;
+    
+    const startX = 30; 
+    const branchOffset = 90;
+    
+    const nodeGap = isLargeScreen ? 48 : 0; 
+    const baseSpacing = isMediumScreen ? 160 : 140;
+    const spacing = isLargeScreen ? baseSpacing + nodeGap : baseSpacing;
     
     const positions = [
-      { x: 100, y: centerY },
-      { x: 100 + spacing, y: centerY },
-      { x: 100 + spacing * 2, y: centerY },
-      { x: 100 + spacing * 3, y: centerY - branchOffset },
-      { x: 100 + spacing * 3, y: centerY + branchOffset }
+      { x: startX, y: centerY },
+      { x: startX + baseSpacing + nodeGap, y: centerY },
+      { x: startX + (baseSpacing + nodeGap) * 2, y: centerY },
+      { x: startX + (baseSpacing + nodeGap) * 3, y: centerY - branchOffset },
+      { x: startX + (baseSpacing + nodeGap) * 3, y: centerY + branchOffset }
     ];
-
+  
     return nodes.map((node, index) => ({
       ...node,
-      x: positions[index]?.x ?? 100 + (index * spacing),
+      x: positions[index]?.x ?? startX + (index * spacing),
       y: positions[index]?.y ?? centerY
     }));
+  }
+  
+  getBranchPath(edge: GraphEdge, direction: 'up' | 'down'): string {
+    const source = this.getNodePosition(edge.source);
+    const target = this.getNodePosition(edge.target);
+    
+    const nodeRadius = 24;
+    const arrowSpace = 12; // Increased from 8 to 12 to ensure arrowhead is visible
+    
+    // Start point: right edge of node 3 with spacing
+    const startX = source.x + nodeRadius + 8;
+    const startY = source.y;
+    
+    // End point: left edge of target node with MORE spacing for arrowhead
+    const endX = target.x - nodeRadius - arrowSpace;
+    const endY = target.y;
+    
+    // Calculate available width
+    const availableWidth = endX - startX;
+    
+    // From the SVG: proportions
+    const firstSegmentRatio = 0.3886;
+    const firstSegmentLength = availableWidth * firstSegmentRatio;
+    const turn1X = startX + firstSegmentLength;
+    
+    const curveRatio = 0.3075;
+    const curveLength = availableWidth * curveRatio;
+    const curveEndX = turn1X + curveLength;
+    
+    // Control points for cubic bezier curve
+    const cp1X = turn1X + curveLength * 0.5;
+    const cp1Y = startY;
+    const cp2X = turn1X + curveLength * 0.5;
+    const cp2Y = endY;
+    
+    // Path: horizontal → smooth S-curve → horizontal
+    return `
+      M ${startX},${startY}
+      L ${turn1X},${startY}
+      C ${cp1X},${cp1Y} ${cp2X},${cp2Y} ${curveEndX},${endY}
+      L ${endX},${endY}
+    `.trim().replace(/\s+/g, ' ');
+  }
+
+  private onResize(): void {
+    const data = this.graphService.graphData();
+    if (data) {
+      const positionedNodes = this.layoutNodes(data.nodes);
+      this.nodes.set(positionedNodes);
+    }
   }
 
   getNodePosition(nodeId: string): { x: number; y: number } {
     const node = this.nodes().find(n => n.id === nodeId);
     return node ? { x: node.x ?? 0, y: node.y ?? 0 } : { x: 0, y: 0 };
-  }
-
-  getEdgePath(edge: GraphEdge): string {
-    const source = this.getNodePosition(edge.source);
-    const target = this.getNodePosition(edge.target);
-    
-    const nodeRadius = 24;
-    const arrowSpace = 16;
-    
-    if (edge.source === '3' && (edge.target === '4' || edge.target === '5')) {
-      const startX = source.x + nodeRadius + 6;
-      const startY = source.y;
-      
-      const firstHorizontalLength = 50;
-      const turnX = startX + firstHorizontalLength;
-      
-      const verticalEndY = target.y;
-      
-      const finalHorizontalLength = 80;
-      const endX = target.x - finalHorizontalLength;
-      const endY = target.y;
-      
-      const arrowTipX = target.x - nodeRadius - arrowSpace - 6;
-
-      return `M ${startX},${startY} L ${turnX},${startY} L ${turnX},${endY} L ${arrowTipX},${endY}`;
-    }
-    
-    const dx = target.x - source.x;
-    const dy = target.y - source.y;
-    const angle = Math.atan2(dy, dx);
-    
-    const startX = source.x + Math.cos(angle) * (nodeRadius + 6);
-    const startY = source.y + Math.sin(angle) * (nodeRadius + 6);
-    const endX = target.x - Math.cos(angle) * (nodeRadius + arrowSpace + 6);
-    const endY = target.y - Math.sin(angle) * (nodeRadius + arrowSpace + 6);
-    
-    return `M ${startX},${startY} L ${endX},${endY}`;
-  }
-
-  getNodeIcon(nodeId: string): string {
-    const icons: Record<string, string> = {
-      '1': '📧',
-      '2': '💻',
-      '3': '💻',
-      '4': '💻',
-      '5': '💻',
-    };
-    return icons[nodeId] || '💻';
   }
 
   onNodeClick(node: GraphNode, event: MouseEvent): void {
@@ -123,15 +148,15 @@ export class GraphViewComponent {
   onNodeHover(node: GraphNode, event: MouseEvent): void {
     const tooltipData = this.getTooltipData(node);
     
-    let x = (node.x ?? 0) - 140;
-    let y = (node.y ?? 0) - 120;
+    let x = (node.x ?? 0) + 50; 
+    let y = (node.y ?? 0) - 80;
     
     if ((node.x ?? 0) < 200) {
-      x = (node.x ?? 0) + 40;
+      x = (node.x ?? 0) + 50;
     }
     
-    if ((node.y ?? 0) < 140) {
-      y = (node.y ?? 0) + 80;
+    if ((node.y ?? 0) < 100) {
+      y = (node.y ?? 0) + 50;
     }
     
     const position = { x, y };

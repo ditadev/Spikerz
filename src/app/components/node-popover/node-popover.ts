@@ -56,7 +56,7 @@ export class NodePopoverComponent {
 
   // Donut chart calculations
   getCircumference(): number {
-    const radius = 50; // Updated to match new radius
+    const radius = 50; 
     return 2 * Math.PI * radius;
   }
 
@@ -74,7 +74,6 @@ export class NodePopoverComponent {
     const criticalPercentage = data.details.riskSummary.critical / total;
     const circumference = this.getCircumference();
     
-    // Show the critical portion (inverse for stroke-dashoffset)
     return circumference - (circumference * criticalPercentage);
   }
 
