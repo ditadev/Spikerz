@@ -1,0 +1,53 @@
+// Sidebar Styles
+
+// Smooth transitions
+.transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  // Icon styling
+  :host ::ng-deep svg {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  // Scrollbar styling
+  nav {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
+    
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(156, 163, 175, 0.3);
+      border-radius: 4px;
+      
+      &:hover {
+        background-color: rgba(156, 163, 175, 0.5);
+      }
+    }
+  }
+  
+  // Tooltip animation
+  .group:hover .group-hover\:opacity-100 {
+    opacity: 1;
+  }
+  
+  // Button hover effects
+  button {
+    &:hover {
+      transform: translateX(1px);
+    }
+    
+    &:active {
+      transform: scale(0.98);
+    }
+  }

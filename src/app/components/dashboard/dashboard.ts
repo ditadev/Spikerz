@@ -1,13 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SidebarComponent } from '../sidebar/sidebar';
 import { GraphViewComponent } from '../graph-view/graph-view';
 import { NodePopoverComponent } from '../node-popover/node-popover';
+import { CollapsibleCardsComponent } from '../collapsible-cards/collapsible-cards';
 import { GraphDataService } from '../../services/graph-data.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, GraphViewComponent, NodePopoverComponent],
+  imports: [
+    CommonModule, 
+    SidebarComponent, 
+    GraphViewComponent, 
+    NodePopoverComponent,
+    CollapsibleCardsComponent
+  ],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss']
 })

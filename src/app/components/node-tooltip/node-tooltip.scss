@@ -1,0 +1,18 @@
+// Node Tooltip Styles
+
+// Tooltip container
+div {
+    max-width: 400px;
+    animation: tooltipFadeIn 0.2s ease-out;
+  }
+  
+  @keyframes tooltipFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

@@ -1,43 +1,158 @@
-<div class="relative w-full h-[500px] border border-gray-200 rounded-lg overflow-hidden">
-    <svg 
-      #svgCanvas
-      class="w-full h-full"
-      (click)="onCanvasClick($event)">
+<div class="relative w-full" style="height: 307px;">
+  <svg 
+    #svgCanvas
+    class="w-full h-full"
+    viewBox="0 0 727 307"
+    preserveAspectRatio="xMidYMid meet"
+    (click)="onCanvasClick($event)">
+    
+    <!-- Define arrow markers -->
+    <defs>
+      <marker
+        id="arrowhead"
+        markerWidth="6"
+        markerHeight="6"
+        refX="5.5"
+        refY="3"
+        orient="auto"
+        markerUnits="strokeWidth">
+        <path
+          d="M 0 0 L 6 3 L 0 6 z"
+          fill="#94A3B8"
+        />
+      </marker>
       
-      <!-- Render edges -->
+      <marker
+        id="arrowhead-animated"
+        markerWidth="6"
+        markerHeight="6"
+        refX="5.5"
+        refY="3"
+        orient="auto"
+        markerUnits="strokeWidth">
+        <path
+          d="M 0 0 L 6 3 L 0 6 z"
+          fill="#94A3B8"
+        />
+      </marker>
+    </defs>
+
+    <!-- Render edges -->
+    <g class="edges">
       @for (edge of edges(); track edge.source + edge.target) {
-        <line
-          [attr.x1]="getNodePosition(edge.source).x"
-          [attr.y1]="getNodePosition(edge.source).y"
-          [attr.x2]="getNodePosition(edge.target).x"
-          [attr.y2]="getNodePosition(edge.target).y"
-          stroke="#CBD5E1"
-          stroke-width="2"
-          class="transition-all duration-300"
+        <path
+          [attr.d]="getEdgePath(edge)"
+          stroke="#94A3B8"
+          stroke-width="0.75"
+          fill="none"
+          [attr.marker-end]="'url(#arrowhead)'"
+          [attr.stroke-dasharray]="edge.animated ? '4,2' : 'none'"
+          [class.animated-edge]="edge.animated"
         />
       }
-  
-      <!-- Render nodes -->
+    </g>
+
+    <!-- Render nodes -->
+    <g class="nodes">
       @for (node of nodes(); track node.id) {
         <g 
-          class="cursor-pointer transition-transform hover:scale-110"
-          (click)="onNodeClick(node, $event)">
+          class="node-group cursor-pointer"
+          [attr.transform]="'translate(' + node.x + ',' + node.y + ')'"
+          (click)="onNodeClick(node, $event)"
+          (mouseenter)="onNodeHover(node, $event)"
+          (mouseleave)="onNodeLeave()">
+          
+          <!-- Node circle -->
           <circle
-            [attr.cx]="node.x"
-            [attr.cy]="node.y"
             r="24"
             [attr.fill]="node.color || '#3B82F6'"
-            class="transition-all duration-300"
+            class="node-circle transition-all duration-200"
           />
+          
+          <!-- Node icon -->
           <text
-            [attr.x]="node.x"
-            [attr.y]="(node.y ?? 0) + 40"
             text-anchor="middle"
-            class="text-sm font-medium fill-gray-700 pointer-events-none"
+            dominant-baseline="central"
+            class="fill-white text-lg pointer-events-none select-none"
+            style="font-size: 20px;"
+          >
+            {{ getNodeIcon(node.id) }}
+          </text>
+          
+          <!-- Badge for critical items -->
+          @if (node.badge) {
+            <circle
+              cx="18"
+              cy="-18"
+              r="12"
+              fill="#EF4444"
+              class="badge-circle"
+            />
+            <text
+              x="18"
+              y="-18"
+              text-anchor="middle"
+              dominant-baseline="central"
+              class="fill-white font-bold pointer-events-none select-none"
+              style="font-size: 11px;"
+            >
+              {{ node.badge }}
+            </text>
+          }
+          
+          <!-- Node label -->
+          <text
+            y="45"
+            text-anchor="middle"
+            class="fill-gray-700 font-medium pointer-events-none select-none"
+            style="font-size: 13px;"
           >
             {{ node.label }}
           </text>
+          
+          <!-- Node sublabel (IP address) -->
+          @if (node.sublabel) {
+            <text
+              y="60"
+              text-anchor="middle"
+              class="fill-gray-500 pointer-events-none select-none"
+              style="font-size: 11px;"
+            >
+              {{ node.sublabel }}
+            </text>
+          }
         </g>
       }
-    </svg>
+    </g>
+  </svg>
+
+  <!-- Tooltip -->
+  @if (hoveredNode()) {
+    <app-node-tooltip 
+      [data]="hoveredNode()!.data"
+      [position]="hoveredNode()!.position">
+    </app-node-tooltip>
+  }
+
+  <!-- Legend at bottom left -->
+  <div class="absolute bottom-2 left-4 flex items-center gap-4">
+    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">
+      <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+        ⚠
+      </div>
+      <span class="text-xs font-medium text-gray-700">Lorem</span>
+    </div>
+    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">
+      <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+        ⚠
+      </div>
+      <span class="text-xs font-medium text-gray-700">Lorem</span>
+    </div>
+    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">
+      <div class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+        ✓
+      </div>
+      <span class="text-xs font-medium text-gray-700">Lorem</span>
+    </div>
   </div>
+</div>

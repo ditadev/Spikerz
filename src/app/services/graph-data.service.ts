@@ -1,5 +1,5 @@
 import { Injectable, signal, Signal } from '@angular/core';
-import { GraphData, GraphNode, PopoverData } from '../models/graph.model';
+import { GraphData, GraphNode, PopoverData, NodeDetails, Asset } from '../models/graph.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,15 +27,52 @@ export class GraphDataService {
     setTimeout(() => {
       const mockData: GraphData = {
         nodes: [
-          { id: '1', label: 'Node 1', value: 100, color: '#3B82F6' },
-          { id: '2', label: 'Node 2', value: 200, color: '#10B981' },
-          { id: '3', label: 'Node 3', value: 150, color: '#F59E0B' },
-          { id: '4', label: 'Node 4', value: 300, color: '#EF4444' },
+          { 
+            id: '1', 
+            label: 'Loremipsumm', 
+            value: 100, 
+            color: '#A78BFA',
+            badge: 2,
+            status: 'critical'
+          },
+          { 
+            id: '2', 
+            label: 'Loremipsu', 
+            value: 200, 
+            color: '#3B82F6',
+            status: 'info'
+          },
+          { 
+            id: '3', 
+            label: 'Loremipsu', 
+            value: 150, 
+            color: '#3B82F6',
+            status: 'info'
+          },
+          { 
+            id: '4', 
+            label: 'Loremipsumdolorsit', 
+            sublabel: '192.168.1.1',
+            value: 300, 
+            color: '#3B82F6',
+            badge: 19,
+            status: 'critical'
+          },
+          { 
+            id: '5', 
+            label: 'Loremipsumdolorsit002', 
+            sublabel: '192.168.1.2',
+            value: 250, 
+            color: '#3B82F6',
+            badge: 9,
+            status: 'critical'
+          },
         ],
         edges: [
-          { source: '1', target: '2', value: 50 },
-          { source: '2', target: '3', value: 75 },
-          { source: '3', target: '4', value: 100 },
+          { source: '1', target: '2', animated: false },
+          { source: '2', target: '3' },
+          { source: '3', target: '4' },
+          { source: '3', target: '5' },
         ]
       };
       
@@ -45,7 +82,39 @@ export class GraphDataService {
   }
 
   selectNode(node: GraphNode, position: { x: number; y: number }): void {
-    this._selectedNode.set({ node, position });
+    // Mock detailed data for the selected node
+    const details: NodeDetails = {
+      title: 'Lorem Ipsum Dolor Sit',
+      description: 'Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et Magna Faucibus. Dui Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce Senectus Facilisis Non Diam Leo Nulla Sem Pellentesque. Sit In Vel Sed Cursus Metus Sit Fringilla Vestibulum.',
+      assets: [
+        { 
+          id: '1', 
+          name: 'Loremipsumdolorsit', 
+          ipAddress: '192.168.1.1',
+          riskLevel: 'Critical'
+        },
+        { 
+          id: '2', 
+          name: 'Loremipsumdolorsit002', 
+          ipAddress: '192.168.1.2',
+          riskLevel: 'Critical'
+        }
+      ],
+      metadata: {
+        date: '10/19/2017',
+        type: 'Ut',
+        status: 'Eros',
+        verified: true
+      },
+      riskSummary: {
+        critical: 2,
+        high: 0,
+        medium: 0,
+        low: 0
+      }
+    };
+
+    this._selectedNode.set({ node, details, position });
   }
 
   clearSelection(): void {

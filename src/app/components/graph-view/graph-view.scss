@@ -1,0 +1,41 @@
+// Graph View Styles
+
+.animated-edge {
+    animation: dash 1.5s linear infinite;
+  }
+  
+  @keyframes dash {
+    to {
+      stroke-dashoffset: -12;
+    }
+  }
+  
+  .node-circle {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    
+    &:hover {
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+    }
+  }
+  
+  .node-group {
+    transition: transform 0.2s ease;
+    
+    &:hover {
+      .node-circle {
+        transform: scale(1.05);
+      }
+    }
+  }
+  
+  .badge-circle {
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+  }
+  
+  // Ensure text is not selectable
+  svg text {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
