@@ -105,6 +105,9 @@ export class GraphViewComponent implements OnDestroy {
   onNodeClick(node: GraphNode, event: MouseEvent): void {
     event.stopPropagation();
     this.graphService.selectNode(node, { x: 0, y: 0 });
+    
+    // Also clear any tooltips when clicking on mobile
+    this.hoveredNode.set(null);
   }
   
   onNodeHover(node: GraphNode, event: MouseEvent): void {
@@ -112,16 +115,20 @@ export class GraphViewComponent implements OnDestroy {
     
     const svgRect = this.svgCanvas?.nativeElement.getBoundingClientRect();
     const containerWidth = svgRect?.width ?? 650;
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
+    const isMobile = screenWidth < 768;
     
-    let x = (node.x ?? 0) + 50; 
+    let x = isMobile ? containerWidth / 2 - 120 : (node.x ?? 0) + 50;
     let y = (node.y ?? 0) - 80;
     
-    if ((node.x ?? 0) < 200) {
-      x = (node.x ?? 0) + 50;
-    }
-    
-    if ((node.x ?? 0) > containerWidth - 250) {
-      x = (node.x ?? 0) - 250; 
+    if (!isMobile) {
+      if ((node.x ?? 0) < 200) {
+        x = (node.x ?? 0) + 50;
+      }
+      
+      if ((node.x ?? 0) > containerWidth - 250) {
+        x = (node.x ?? 0) - 250;
+      }
     }
     
     if ((node.y ?? 0) < 100) {
@@ -131,7 +138,7 @@ export class GraphViewComponent implements OnDestroy {
     const position = { x, y };
     this.hoveredNode.set({ node, data: tooltipData, position });
   }
-  
+
   onNodeTouch(node: GraphNode, event: TouchEvent): void {
     event.preventDefault();
     event.stopPropagation();
@@ -141,16 +148,9 @@ export class GraphViewComponent implements OnDestroy {
     const svgRect = this.svgCanvas?.nativeElement.getBoundingClientRect();
     const containerWidth = svgRect?.width ?? 650;
     
-    let x = (node.x ?? 0) + 50; 
+    // Center tooltip horizontally on mobile
+    const x = containerWidth / 2 - 120;
     let y = (node.y ?? 0) - 80;
-    
-    if ((node.x ?? 0) < 200) {
-      x = (node.x ?? 0) + 50;
-    }
-    
-    if ((node.x ?? 0) > containerWidth - 250) {
-      x = (node.x ?? 0) - 250;
-    }
     
     if ((node.y ?? 0) < 100) {
       y = (node.y ?? 0) + 50;
@@ -159,7 +159,7 @@ export class GraphViewComponent implements OnDestroy {
     const position = { x, y };
     this.hoveredNode.set({ node, data: tooltipData, position });
     
-    // Auto-hide tooltip after 3 seconds on mobile
+    // Auto-hide tooltip after 3 seconds
     setTimeout(() => {
       this.hoveredNode.set(null);
     }, 3000);
