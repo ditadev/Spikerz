@@ -1,15 +1,14 @@
 <div class="relative w-full graph-container">
-  <div class="w-full h-full overflow-x-auto overflow-y-hidden lg:overflow-visible px-4 md:px-6">
-    <div class="min-w-[727px] lg:min-w-0 lg:w-full lg:h-full">
+  <div class="w-full h-full overflow-x-auto overflow-y-hidden lg:overflow-visible">
+    <div [style.min-width.px]="getMinWidth()" class="lg:min-w-0 lg:w-full lg:h-full px-4 md:px-6">
       <svg 
         #svgCanvas
         class="w-full"
         style="height: calc(100% - 80px);"
-        viewBox="0 0 727 307"
+        [attr.viewBox]="'0 0 ' + getViewBoxWidth() + ' 307'"
         preserveAspectRatio="xMidYMid meet"
         (click)="onCanvasClick($event)">
         
-        <!-- Define arrow markers -->
         <defs>
           <marker
             id="arrowhead"
@@ -38,11 +37,9 @@
           </marker>
         </defs>
 
-        <!-- Render edges -->
         <g class="edges">
           @for (edge of edges(); track edge.source + edge.target) {
             @if (edge.source === '1' && edge.target === '2') {
-              <!-- Arrow from node 1 to node 2 using SVG image -->
               <image 
                 [attr.href]="'assets/icons/arrow.svg'"
                 [attr.x]="getNodePosition(edge.source).x + 32"
@@ -52,7 +49,6 @@
                 preserveAspectRatio="none"
               />
             } @else if (edge.source === '2' && edge.target === '3') {
-              <!-- Arrow from node 2 to node 3 using SVG image -->
               <image 
                 [attr.href]="'assets/icons/arrow.svg'"
                 [attr.x]="getNodePosition(edge.source).x + 32"
@@ -62,7 +58,6 @@
                 preserveAspectRatio="none"
               />
             } @else if (edge.source === '3' && edge.target === '4') {
-              <!-- Upper branch: node 3 to node 4 -->
               <path
                 [attr.d]="getBranchPath(edge, 'up')"
                 stroke="#858D9D"
@@ -72,7 +67,6 @@
                 stroke-linejoin="round"
               />
             } @else if (edge.source === '3' && edge.target === '5') {
-              <!-- Lower branch: node 3 to node 5 -->
               <path
                 [attr.d]="getBranchPath(edge, 'down')"
                 stroke="#858D9D"
@@ -85,7 +79,6 @@
           }
         </g>
 
-        <!-- Render nodes -->
         <g class="nodes">
           @for (node of nodes(); track node.id) {
             <g 
@@ -93,9 +86,9 @@
               [attr.transform]="'translate(' + node.x + ',' + node.y + ')'"
               (click)="onNodeClick(node, $event)"
               (mouseenter)="onNodeHover(node, $event)"
-              (mouseleave)="onNodeLeave()">
+              (mouseleave)="onNodeLeave()"
+              (touchstart)="onNodeTouch(node, $event)">
               
-              <!-- Node circle -->
               @if (node.id === '1') {
                 <circle
                   r="24"
@@ -103,7 +96,6 @@
                   class="node-circle transition-all duration-200"
                 />
               } @else {
-                <!-- Light blue circle for server nodes -->
                 <circle
                   r="24"
                   fill="#DBEAFE"
@@ -111,10 +103,8 @@
                 />
               }
               
-              <!-- Node icon -->
               <g>
                 @if (node.id === '1') {
-                  <!-- Node 1 icon -->
                   <image 
                     [attr.href]="'assets/icons/node1.svg'" 
                     x="-16" 
@@ -124,7 +114,6 @@
                     class="pointer-events-none"
                   />
                 } @else {
-                  <!-- Other nodes icon -->
                   <image 
                     [attr.href]="'assets/icons/other-nodes.svg'" 
                     x="-16" 
@@ -136,10 +125,8 @@
                 }
               </g>
               
-              <!-- Badge for critical items -->
               @if (node.badge) {
                 @if (node.id === '1') {
-                  <!-- Node 1 notification badge -->
                   <image 
                     [attr.href]="'assets/icons/node1-notification.svg'" 
                     x="6" 
@@ -149,7 +136,6 @@
                     class="pointer-events-none"
                   />
                 } @else {
-                  <!-- Red shield with X for other nodes -->
                   <circle
                     cx="18"
                     cy="-18"
@@ -157,7 +143,6 @@
                     fill="#EF4444"
                     class="badge-circle"
                   />
-                  <!-- Shield with X icon -->
                   <svg x="10" y="-26" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" class="pointer-events-none">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     <line x1="9" y1="9" x2="15" y2="15"/>
@@ -166,7 +151,6 @@
                 }
               }
               
-              <!-- Node label -->
               <text
                 y="45"
                 text-anchor="middle"
@@ -176,7 +160,6 @@
                 {{ node.label }}
               </text>
               
-              <!-- Node sublabel (IP address) -->
               @if (node.sublabel) {
                 <text
                   y="60"
@@ -194,7 +177,6 @@
     </div>
   </div>
 
-  <!-- Tooltip -->
   @if (hoveredNode()) {
     <app-node-tooltip 
       [data]="hoveredNode()!.data"
@@ -202,12 +184,10 @@
     </app-node-tooltip>
   }
 
-  <!-- Divider -->
   <div class="absolute bottom-16 left-0 right-0 px-4 md:px-6">
     <div class="border-t border-gray-200"></div>
   </div>
 
-  <!-- Legend at bottom -->
   <div class="absolute bottom-0 left-0 right-0 px-4 md:px-6 py-4">
     <div class="flex items-center gap-3 md:gap-4 flex-wrap">
       <div class="flex items-center gap-2">

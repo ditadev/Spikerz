@@ -68,23 +68,52 @@ export class GraphViewComponent implements OnDestroy {
     
     const nodeGap = isLargeScreen ? 48 : 0; 
     const baseSpacing = isMediumScreen ? 160 : 140;
-    const spacing = isLargeScreen ? baseSpacing + nodeGap : baseSpacing;
+    
+    const branchExtraSpace = !isLargeScreen && !isMediumScreen ? 20 : 0;
     
     const positions = [
       { x: startX, y: centerY },
       { x: startX + baseSpacing + nodeGap, y: centerY },
       { x: startX + (baseSpacing + nodeGap) * 2, y: centerY },
-      { x: startX + (baseSpacing + nodeGap) * 3, y: centerY - branchOffset },
-      { x: startX + (baseSpacing + nodeGap) * 3, y: centerY + branchOffset }
+      { x: startX + (baseSpacing + nodeGap) * 3 + branchExtraSpace, y: centerY - branchOffset },
+      { x: startX + (baseSpacing + nodeGap) * 3 + branchExtraSpace, y: centerY + branchOffset }
     ];
   
     return nodes.map((node, index) => ({
       ...node,
-      x: positions[index]?.x ?? startX + (index * spacing),
+      x: positions[index]?.x ?? startX + (index * baseSpacing),
       y: positions[index]?.y ?? centerY
     }));
   }
   
+  getViewBoxWidth(): number {
+    const nodes = this.nodes();
+    if (nodes.length === 0) return 650;
+    
+    const rightmostX = Math.max(...nodes.map(n => (n.x ?? 0)));
+    const nodeRadius = 24;
+    const badgeWidth = 30;
+    const endPadding = 30;
+    
+    return Math.ceil(rightmostX + nodeRadius + badgeWidth + endPadding);
+  }
+  
+  getMinWidth(): number {
+    return this.getViewBoxWidth();
+  }
+  
+  onNodeTouch(node: GraphNode, event: TouchEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const currentHovered = this.hoveredNode();
+    if (currentHovered?.node.id === node.id) {
+      this.hoveredNode.set(null);
+    } else {
+      this.onNodeHover(node, event as any);
+    }
+  }
+
   getBranchPath(edge: GraphEdge, direction: 'up' | 'down'): string {
     const source = this.getNodePosition(edge.source);
     const target = this.getNodePosition(edge.target);
