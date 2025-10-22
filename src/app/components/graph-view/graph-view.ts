@@ -104,9 +104,16 @@ export class GraphViewComponent implements OnDestroy {
   
   onNodeClick(node: GraphNode, event: MouseEvent): void {
     event.stopPropagation();
+    console.log('Node clicked:', node.id);
     this.graphService.selectNode(node, { x: 0, y: 0 });
+    this.hoveredNode.set(null);
+  }
+  
+  onNodeTouch(node: GraphNode, event: TouchEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
     
-    // Also clear any tooltips when clicking on mobile
+    this.graphService.selectNode(node, { x: 0, y: 0 });
     this.hoveredNode.set(null);
   }
   
@@ -118,10 +125,16 @@ export class GraphViewComponent implements OnDestroy {
     const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
     const isMobile = screenWidth < 768;
     
-    let x = isMobile ? containerWidth / 2 - 120 : (node.x ?? 0) + 50;
+    let x = (node.x ?? 0) + 50;
     let y = (node.y ?? 0) - 80;
     
-    if (!isMobile) {
+    if (isMobile) {
+      if (node.id === '4' || node.id === '5') {
+        x = (node.x ?? 0) - 260; 
+      } else {
+        x = containerWidth / 2 - 120;
+      }
+    } else {
       if ((node.x ?? 0) < 200) {
         x = (node.x ?? 0) + 50;
       }
@@ -138,32 +151,6 @@ export class GraphViewComponent implements OnDestroy {
     const position = { x, y };
     this.hoveredNode.set({ node, data: tooltipData, position });
   }
-
-  onNodeTouch(node: GraphNode, event: TouchEvent): void {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    const tooltipData = this.getTooltipData(node);
-    
-    const svgRect = this.svgCanvas?.nativeElement.getBoundingClientRect();
-    const containerWidth = svgRect?.width ?? 650;
-    
-    // Center tooltip horizontally on mobile
-    const x = containerWidth / 2 - 120;
-    let y = (node.y ?? 0) - 80;
-    
-    if ((node.y ?? 0) < 100) {
-      y = (node.y ?? 0) + 50;
-    }
-    
-    const position = { x, y };
-    this.hoveredNode.set({ node, data: tooltipData, position });
-    
-    // Auto-hide tooltip after 3 seconds
-    setTimeout(() => {
-      this.hoveredNode.set(null);
-    }, 3000);
-  }
   
   onNodeLeave(): void {
     const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
@@ -177,7 +164,7 @@ export class GraphViewComponent implements OnDestroy {
     const target = this.getNodePosition(edge.target);
     
     const nodeRadius = 24;
-    const arrowSpace = 12; // Increased from 8 to 12 to ensure arrowhead is visible
+    const arrowSpace = 12; 
     
     // Start point: right edge of node 3 with spacing
     const startX = source.x + nodeRadius + 8;
