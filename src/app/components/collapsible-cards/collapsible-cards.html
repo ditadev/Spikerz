@@ -15,26 +15,20 @@
         @for (item of card.items; track item.label) {
           <!-- Entire item with gray background -->
           <div class="bg-gray-50 rounded-lg px-4 py-3 md:py-3.5 flex items-center gap-3 md:gap-4">
-            <!-- Icon -->
-            <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-              <img 
-                src="assets/icons/server.svg" 
-                alt="server" 
-                style="width: 45px; height: 45px; min-width: 45px; min-height: 45px;"
-                class="flex-shrink-0">
-            </div>
+            <img 
+              src="assets/icons/server.svg" 
+              alt="server" 
+              style="width: 53px; height: 53px; min-width: 53px; min-height: 53px;"
+              class="flex-shrink-0">
             
-            <!-- Content -->
             <div class="flex-1 flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-4">
               <div class="flex-shrink-0">
                 <div class="text-sm font-semibold text-gray-900">{{ item.label }}</div>
                 <div class="text-sm text-gray-500">{{ item.sublabel }}</div>
               </div>
               
-              <!-- Vertical Divider - Hidden on mobile -->
               <div class="hidden md:block w-px h-12 bg-gray-300"></div>
               
-              <!-- Info Text -->
               <div class="flex-1 text-sm text-gray-600 leading-relaxed">
                 {{ item.info }}
               </div>
