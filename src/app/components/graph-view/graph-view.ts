@@ -104,17 +104,11 @@ export class GraphViewComponent implements OnDestroy {
   
   onNodeClick(node: GraphNode, event: MouseEvent): void {
     event.stopPropagation();
-    console.log('Node clicked:', node.id);
-    this.graphService.selectNode(node, { x: 0, y: 0 });
-    this.hoveredNode.set(null);
   }
   
   onNodeTouch(node: GraphNode, event: TouchEvent): void {
     event.preventDefault();
     event.stopPropagation();
-    
-    this.graphService.selectNode(node, { x: 0, y: 0 });
-    this.hoveredNode.set(null);
   }
   
   onNodeHover(node: GraphNode, event: MouseEvent): void {

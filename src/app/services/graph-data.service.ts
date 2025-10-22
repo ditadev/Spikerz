@@ -19,6 +19,7 @@ export class GraphDataService {
     this.isLoading = this._isLoading.asReadonly();
     
     this.loadGraphData();
+    this.setDefaultPopover();
   }
 
   loadGraphData(): void {
@@ -69,7 +70,7 @@ export class GraphDataService {
           },
         ],
         edges: [
-          { source: '1', target: '2', animated: false },
+          { source: '1', target: '2', animated: true },
           { source: '2', target: '3' },
           { source: '3', target: '4' },
           { source: '3', target: '5' },
@@ -80,9 +81,47 @@ export class GraphDataService {
       this._isLoading.set(false);
     }, 500);
   }
+  
+  private setDefaultPopover(): void {
+    const details: NodeDetails = {
+      title: 'Lorem Ipsum Dolor Sit',
+      description: 'Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et Magna Faucibus. Dui Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce Senectus Facilisis Non Diam Leo Nulla Sem Pellentesque. Sit In Vel Sed Cursus Metus Sit Fringilla Vestibulum.',
+      assets: [
+        { 
+          id: '1', 
+          name: 'Loremipsumdolorsit', 
+          ipAddress: '192.168.1.1',
+          riskLevel: 'Critical'
+        },
+        { 
+          id: '2', 
+          name: 'Loremipsumdolorsit002', 
+          ipAddress: '192.168.1.2',
+          riskLevel: 'Critical'
+        }
+      ],
+      metadata: {
+        date: '10/19/2017',
+        type: 'Ut',
+        status: 'Eros',
+        verified: true
+      },
+      riskSummary: {
+        critical: 2,
+        high: 0,
+        medium: 0,
+        low: 0
+      }
+    };
+  
+    this._selectedNode.set({ 
+      node: { id: '1', label: 'Default', value: 0 }, 
+      details, 
+      position: { x: 0, y: 0 } 
+    });
+  }
 
   selectNode(node: GraphNode, position: { x: number; y: number }): void {
-    // Mock detailed data for the selected node
     const details: NodeDetails = {
       title: 'Lorem Ipsum Dolor Sit',
       description: 'Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et Magna Faucibus. Dui Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce Senectus Facilisis Non Diam Leo Nulla Sem Pellentesque. Sit In Vel Sed Cursus Metus Sit Fringilla Vestibulum.',
@@ -118,6 +157,5 @@ export class GraphDataService {
   }
 
   clearSelection(): void {
-    this._selectedNode.set(null);
   }
 }
