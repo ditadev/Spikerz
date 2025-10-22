@@ -1,6 +1,5 @@
 // Collapsible Cards Styles
 
-// Smooth height transitions
 .max-h-0 {
     max-height: 0;
     opacity: 0;
@@ -9,21 +8,14 @@
   }
   
   .max-h-\[500px\] {
-    max-height: 500px;
+    max-height: 31.25rem; // 500px in rem
     opacity: 1;
   }
   
-  // Rotate animation for chevron
   .rotate-180 {
     transform: rotate(180deg);
   }
   
-  // Card styling
-  .bg-white {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  }
-  
-  // Button hover effect
   button {
     &:hover {
       background-color: rgba(249, 250, 251, 0.5);
@@ -34,7 +26,6 @@
     }
   }
   
-  // Smooth transitions for all elements
   * {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }

@@ -1,0 +1,46 @@
+// Design Tokens - No hardcoded pixels
+// Use these CSS custom properties throughout the app
+
+:root {
+    // Spacing tokens
+    --spacing-xs: 0.25rem;    // 4px
+    --spacing-sm: 0.5rem;     // 8px
+    --spacing-md: 1rem;       // 16px
+    --spacing-lg: 1.5rem;     // 24px
+    --spacing-xl: 2rem;       // 32px
+    --spacing-2xl: 2.5rem;    // 40px
+  
+    // Component specific widths
+    --sidebar-width: 15rem;           // 240px
+    --sidebar-collapsed-width: 4rem;  // 64px
+    --graph-height: 19.1875rem;       // 307px
+    --asset-list-width: 22.9375rem;   // 367px
+    --risk-summary-width: 21.25rem;   // 340px
+    --right-column-width: 49.1875rem; // 787px
+  
+    // Border radius tokens
+    --radius-sm: 0.5rem;    // 8px
+    --radius-md: 0.9375rem; // 15px
+    --radius-lg: 1.25rem;   // 20px
+  
+    // Node sizes
+    --node-radius: 1.5rem;       // 24px
+    --node-badge-radius: 0.75rem; // 12px
+    --node-icon-size: 1.25rem;    // 20px
+  
+    // Colors
+    --color-primary: #10B981;     // emerald-500
+    --color-primary-light: #D1FAE5; // emerald-100
+    --color-danger: #EF4444;      // red-500
+    --color-warning: #F59E0B;     // orange-500
+    --color-info: #3B82F6;        // blue-500
+    --color-success: #10B981;     // emerald-500
+    
+    // Typography
+    --font-size-xs: 0.75rem;   // 12px
+    --font-size-sm: 0.875rem;  // 14px
+    --font-size-base: 1rem;    // 16px
+    --font-size-lg: 1.125rem;  // 18px
+    --font-size-xl: 1.25rem;   // 20px
+    --font-size-2xl: 1.5rem;   // 24px
+  }

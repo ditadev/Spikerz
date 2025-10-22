@@ -28,7 +28,7 @@
       
       <!-- Server Node Type (Nodes 2 & 3) -->
       @if (data.type === 'server') {
-        <div class="space-y-3 min-w-[280px]">
+        <div class="space-y-3 min-w-xs">
           <!-- Server Info -->
           @if (data.serverName) {
             <div class="flex items-center gap-2">
@@ -87,7 +87,7 @@
       
       <!-- Branch Server Node Type (Nodes 4 & 5) -->
       @if (data.type === 'branch-server') {
-        <div class="space-y-3 min-w-[240px]">
+        <div class="space-y-3 min-w-60">
           <!-- Server Info with IP -->
           @if (data.serverName) {
             <div class="flex items-center gap-2">
