@@ -1,66 +1,275 @@
 <div class="flex h-screen bg-gray-50">
-  <div style="position: relative; flex-shrink: 0;">
+  <div style="position: relative; flex-shrink: 0">
     <app-sidebar></app-sidebar>
   </div>
 
   <div class="flex flex-col lg:flex-row gap-4 md:gap-8 flex-1 overflow-auto">
-
     <!-- Mobile: Single Column Layout -->
     <div class="flex flex-col gap-4 md:gap-5 p-4 md:p-8 lg:hidden w-full">
-
       <app-card [padding]="'lg'">
         <div class="space-y-6">
           <section>
-            <h2 style="font-family: 'Public Sans', sans-serif; font-size: 20px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #02983E; margin-bottom: 12px;">Description</h2>
-            <p style="font-family: 'Public Sans', sans-serif; font-size: 12px; line-height: 21px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">
-              Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et Magna Faucibus. Dui
-              Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce Senectus Facilisis Non Diam Leo Nulla Sem
-              Pellentesque. Sit In Vel Sed Cursus Metus Sit Fringilla Vestibulum.
+            <h2
+              style="
+                font-family: 'Public Sans', sans-serif;
+                font-size: 20px;
+                line-height: 22px;
+                font-weight: 700;
+                letter-spacing: 0.01em;
+                text-transform: capitalize;
+                color: #02983e;
+                margin-bottom: 12px;
+              "
+            >
+              Description
+            </h2>
+            <p
+              style="
+                font-family: 'Public Sans', sans-serif;
+                font-size: 12px;
+                line-height: 21px;
+                font-weight: 400;
+                letter-spacing: 0.01em;
+                text-transform: capitalize;
+                color: var(--color-gray-soft-700, #525d73);
+              "
+            >
+              Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et
+              Magna Faucibus. Dui Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce
+              Senectus Facilisis Non Diam Leo Nulla Sem Pellentesque. Sit In Vel Sed Cursus Metus
+              Sit Fringilla Vestibulum.
             </p>
           </section>
 
           <section>
-            <h2 style="font-family: 'Public Sans', sans-serif; font-size: 20px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #02983E; margin-bottom: 12px;">Extra</h2>
-            <p style="font-family: 'Public Sans', sans-serif; font-size: 12px; line-height: 21px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73); margin-bottom: 16px;">
-              Lorem ipsum dolor sit amet consectetur. Tempus a id adipiscing fames egestas tellus dis pretium tempus.
-              Justo nisl nisl lorem lectus id ornare. Rhoncus in egestas in amet porttitor pellentesque sit. Amet
-              gravida integer velit felis. Eu consectetur interdum auctor sed aliquam. Eu pulvinar arcu sed id. Duis a
-              aliquem eu quisque commodo lectus. Lectus ipsum velit purus viverra vulputate viverra in nunc nulla.
-              Euismod rhoncus mauris urna orci gravida sagittis netus. Amet mus in vel etiam. Interdum habitant congue
-              massa in etiam sit. Commodo nibh viverra lobortis augue lorem quam lorem suspendisse.
+            <h2
+              style="
+                font-family: 'Public Sans', sans-serif;
+                font-size: 20px;
+                line-height: 22px;
+                font-weight: 700;
+                letter-spacing: 0.01em;
+                text-transform: capitalize;
+                color: #02983e;
+                margin-bottom: 12px;
+              "
+            >
+              Extra
+            </h2>
+            <p
+              style="
+                font-family: 'Public Sans', sans-serif;
+                font-size: 12px;
+                line-height: 21px;
+                font-weight: 400;
+                letter-spacing: 0.01em;
+                text-transform: capitalize;
+                color: var(--color-gray-soft-700, #525d73);
+                margin-bottom: 16px;
+              "
+            >
+              Lorem ipsum dolor sit amet consectetur. Tempus a id adipiscing fames egestas tellus
+              dis pretium tempus. Justo nisl nisl lorem lectus id ornare. Rhoncus in egestas in amet
+              porttitor pellentesque sit. Amet gravida integer velit felis. Eu consectetur interdum
+              auctor sed aliquam. Eu pulvinar arcu sed id. Duis a aliquem eu quisque commodo lectus.
+              Lectus ipsum velit purus viverra vulputate viverra in nunc nulla. Euismod rhoncus
+              mauris urna orci gravida sagittis netus. Amet mus in vel etiam. Interdum habitant
+              congue massa in etiam sit. Commodo nibh viverra lobortis augue lorem quam lorem
+              suspendisse.
             </p>
 
             <div class="border-t border-b border-gray-200 py-3">
               <div class="flex py-2 gap-2">
-                <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
-                <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">10/19/2017</span>
+                <span
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 15px;
+                    line-height: 22px;
+                    font-weight: 700;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: #334155;
+                    flex-shrink: 0;
+                  "
+                  >Lorem Ipsum Dolor</span
+                >
+                <span
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 15px;
+                    line-height: 22px;
+                    font-weight: 400;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: var(--color-gray-soft-700, #525d73);
+                  "
+                  >10/19/2017</span
+                >
               </div>
               <div class="flex py-2 gap-2">
-                <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
-                <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">Ut</span>
+                <span
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 15px;
+                    line-height: 22px;
+                    font-weight: 700;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: #334155;
+                    flex-shrink: 0;
+                  "
+                  >Lorem Ipsum Dolor</span
+                >
+                <span
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 15px;
+                    line-height: 22px;
+                    font-weight: 400;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: var(--color-gray-soft-700, #525d73);
+                  "
+                  >Ut</span
+                >
               </div>
               <div class="flex py-2 gap-2">
-                <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
-                <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">Eros</span>
+                <span
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 15px;
+                    line-height: 22px;
+                    font-weight: 700;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: #334155;
+                    flex-shrink: 0;
+                  "
+                  >Lorem Ipsum Dolor</span
+                >
+                <span
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 15px;
+                    line-height: 22px;
+                    font-weight: 400;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: var(--color-gray-soft-700, #525d73);
+                  "
+                  >Eros</span
+                >
               </div>
               <div class="flex py-2 gap-2">
-                <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
+                <span
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 15px;
+                    line-height: 22px;
+                    font-weight: 700;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: #334155;
+                    flex-shrink: 0;
+                  "
+                  >Lorem Ipsum Dolor</span
+                >
                 <div class="flex items-center gap-2">
                   <mat-icon class="text-emerald-500 text-base">check</mat-icon>
-                  <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">Yes</span>
+                  <span
+                    style="
+                      font-family: 'Public Sans', sans-serif;
+                      font-size: 15px;
+                      line-height: 22px;
+                      font-weight: 400;
+                      letter-spacing: 0.01em;
+                      text-transform: capitalize;
+                      color: var(--color-gray-soft-700, #525d73);
+                    "
+                    >Yes</span
+                  >
                 </div>
               </div>
               <div class="flex py-2 gap-2">
-                <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
-                <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">Sit</span>
+                <span
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 15px;
+                    line-height: 22px;
+                    font-weight: 700;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: #334155;
+                    flex-shrink: 0;
+                  "
+                  >Lorem Ipsum Dolor</span
+                >
+                <span
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 15px;
+                    line-height: 22px;
+                    font-weight: 400;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: var(--color-gray-soft-700, #525d73);
+                  "
+                  >Sit</span
+                >
               </div>
               <div class="flex py-2 gap-2">
-                <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
-                <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">Lorem Ipsum Dolor</span>
+                <span
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 15px;
+                    line-height: 22px;
+                    font-weight: 700;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: #334155;
+                    flex-shrink: 0;
+                  "
+                  >Lorem Ipsum Dolor</span
+                >
+                <span
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 15px;
+                    line-height: 22px;
+                    font-weight: 400;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: var(--color-gray-soft-700, #525d73);
+                  "
+                  >Lorem Ipsum Dolor</span
+                >
               </div>
               <div class="flex py-2 gap-2">
-                <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
-                <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">Lorem Ipsum Dolor</span>
+                <span
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 15px;
+                    line-height: 22px;
+                    font-weight: 700;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: #334155;
+                    flex-shrink: 0;
+                  "
+                  >Lorem Ipsum Dolor</span
+                >
+                <span
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 15px;
+                    line-height: 22px;
+                    font-weight: 400;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: var(--color-gray-soft-700, #525d73);
+                  "
+                  >Lorem Ipsum Dolor</span
+                >
               </div>
             </div>
           </section>
@@ -75,21 +284,31 @@
       <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
         <div class="px-4 py-3">
           <h2
-            style="font-family: 'Public Sans', sans-serif; font-size: 20px; line-height: 22px; font-weight: 700; letter-spacing: var(--letter-spacing-1-percent, 0.01em); text-transform: capitalize; color: var(--color-success, #02983E);">
-            Lorem Lorem Lorem</h2>
+            style="
+              font-family: 'Public Sans', sans-serif;
+              font-size: 20px;
+              line-height: 22px;
+              font-weight: 700;
+              letter-spacing: var(--letter-spacing-1-percent, 0.01em);
+              text-transform: capitalize;
+              color: var(--color-success, #02983e);
+            "
+          >
+            Lorem Lorem Lorem
+          </h2>
         </div>
 
         <div class="bg-gray-50 mx-3 mb-3 rounded-xl p-3 overflow-hidden">
           @if (graphService.isLoading()) {
-          <div class="flex items-center justify-center h-64">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
-          </div>
+            <div class="flex items-center justify-center h-64">
+              <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+            </div>
           } @else {
-          <app-graph-view />
+            <app-graph-view />
           }
         </div>
 
-        <div class="px-4 pb-4" style="padding-bottom: max(1rem, env(safe-area-inset-bottom));">
+        <div class="px-4 pb-4" style="padding-bottom: max(1rem, env(safe-area-inset-bottom))">
           <app-node-popover />
         </div>
       </div>
@@ -98,70 +317,288 @@
     <!-- Desktop: Two Column Layout with Centered Content -->
     <div class="hidden lg:flex lg:flex-row flex-1 p-8 overflow-hidden w-full justify-center">
       <div class="w-full max-w-[1400px] flex gap-3">
-        
         <!-- Left Column: Description & Extra - Responsive width -->
-        <div class="w-[385px] xl:w-[420px] 2xl:w-[480px] flex-shrink-0 overflow-y-auto">
-          <div class="bg-white rounded-2xl shadow-sm" style="padding: 20px 30px;">
+        <div class="w-[340px] xl:w-[385px] 2xl:w-[480px] flex-shrink-0 overflow-y-auto">
+          <div class="bg-white rounded-2xl shadow-sm" style="padding: 20px 30px">
             <div class="flex flex-col gap-3">
               <section>
-                <h2 style="font-family: 'Public Sans', sans-serif; font-size: 20px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #02983E; margin-bottom: 16px;">Description</h2>
-                <p style="font-family: 'Public Sans', sans-serif; font-size: 12px; line-height: 21px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">
-                  Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et Magna Faucibus. Dui
-                  Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce Senectus Facilisis Non Diam Leo Nulla Sem
-                  Pellentesque. Sit In Vel Sed Cursus Metus Sit Fringilla Vestibulum.
+                <h2
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 20px;
+                    line-height: 22px;
+                    font-weight: 700;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: #02983e;
+                    margin-bottom: 16px;
+                  "
+                >
+                  Description
+                </h2>
+                <p
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 12px;
+                    line-height: 21px;
+                    font-weight: 400;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: var(--color-gray-soft-700, #525d73);
+                  "
+                >
+                  Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh
+                  Et Magna Faucibus. Dui Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque
+                  Fusce Senectus Facilisis Non Diam Leo Nulla Sem Pellentesque. Sit In Vel Sed
+                  Cursus Metus Sit Fringilla Vestibulum.
                 </p>
               </section>
 
               <section>
-                <h2 style="font-family: 'Public Sans', sans-serif; font-size: 20px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #02983E; margin-bottom: 16px;">Extra</h2>
-                <p style="font-family: 'Public Sans', sans-serif; font-size: 12px; line-height: 21px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73); margin-bottom: 24px;">
-                  Lorem ipsum dolor sit amet consectetur. Tempus a id adipiscing fames egestas tellus dis pretium tempus.
-                  Justo nisl nisl lorem lectus id ornare. Rhoncus in egestas in amet porttitor pellentesque sit. Amet
-                  gravida integer velit felis. Eu consectetur interdum auctor sed aliquam. Eu pulvinar arcu sed id. Duis a
-                  aliquem eu quisque commodo lectus. Lectus ipsum velit purus viverra vulputate viverra in nunc nulla.
-                  Euismod rhoncus mauris urna orci gravida sagittis netus. Amet mus in vel etiam. Interdum habitant congue
-                  massa in etiam sit. Commodo nibh viverra lobortis augue lorem quam lorem suspendisse.
+                <h2
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 20px;
+                    line-height: 22px;
+                    font-weight: 700;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: #02983e;
+                    margin-bottom: 16px;
+                  "
+                >
+                  Extra
+                </h2>
+                <p
+                  style="
+                    font-family: 'Public Sans', sans-serif;
+                    font-size: 12px;
+                    line-height: 21px;
+                    font-weight: 400;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                    color: var(--color-gray-soft-700, #525d73);
+                    margin-bottom: 24px;
+                  "
+                >
+                  Lorem ipsum dolor sit amet consectetur. Tempus a id adipiscing fames egestas
+                  tellus dis pretium tempus. Justo nisl nisl lorem lectus id ornare. Rhoncus in
+                  egestas in amet porttitor pellentesque sit. Amet gravida integer velit felis. Eu
+                  consectetur interdum auctor sed aliquam. Eu pulvinar arcu sed id. Duis a aliquem
+                  eu quisque commodo lectus. Lectus ipsum velit purus viverra vulputate viverra in
+                  nunc nulla. Euismod rhoncus mauris urna orci gravida sagittis netus. Amet mus in
+                  vel etiam. Interdum habitant congue massa in etiam sit. Commodo nibh viverra
+                  lobortis augue lorem quam lorem suspendisse.
                 </p>
 
                 <div class="border-t border-b border-gray-200 py-3">
                   <div class="flex py-2 gap-4">
-                    <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
-                    <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">10/19/2017</span>
+                    <span
+                      style="
+                        font-family: 'Public Sans', sans-serif;
+                        font-size: 15px;
+                        line-height: 22px;
+                        font-weight: 700;
+                        letter-spacing: 0.01em;
+                        text-transform: capitalize;
+                        color: #334155;
+                        flex-shrink: 0;
+                      "
+                      >Lorem Ipsum Dolor</span
+                    >
+                    <span
+                      style="
+                        font-family: 'Public Sans', sans-serif;
+                        font-size: 15px;
+                        line-height: 22px;
+                        font-weight: 400;
+                        letter-spacing: 0.01em;
+                        text-transform: capitalize;
+                        color: var(--color-gray-soft-700, #525d73);
+                      "
+                      >10/19/2017</span
+                    >
                   </div>
                   <div class="flex py-2 gap-4">
-                    <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
-                    <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">Ut</span>
+                    <span
+                      style="
+                        font-family: 'Public Sans', sans-serif;
+                        font-size: 15px;
+                        line-height: 22px;
+                        font-weight: 700;
+                        letter-spacing: 0.01em;
+                        text-transform: capitalize;
+                        color: #334155;
+                        flex-shrink: 0;
+                      "
+                      >Lorem Ipsum Dolor</span
+                    >
+                    <span
+                      style="
+                        font-family: 'Public Sans', sans-serif;
+                        font-size: 15px;
+                        line-height: 22px;
+                        font-weight: 400;
+                        letter-spacing: 0.01em;
+                        text-transform: capitalize;
+                        color: var(--color-gray-soft-700, #525d73);
+                      "
+                      >Ut</span
+                    >
                   </div>
                   <div class="flex py-2 gap-4">
-                    <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
-                    <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">Eros</span>
+                    <span
+                      style="
+                        font-family: 'Public Sans', sans-serif;
+                        font-size: 15px;
+                        line-height: 22px;
+                        font-weight: 700;
+                        letter-spacing: 0.01em;
+                        text-transform: capitalize;
+                        color: #334155;
+                        flex-shrink: 0;
+                      "
+                      >Lorem Ipsum Dolor</span
+                    >
+                    <span
+                      style="
+                        font-family: 'Public Sans', sans-serif;
+                        font-size: 15px;
+                        line-height: 22px;
+                        font-weight: 400;
+                        letter-spacing: 0.01em;
+                        text-transform: capitalize;
+                        color: var(--color-gray-soft-700, #525d73);
+                      "
+                      >Eros</span
+                    >
                   </div>
                   <div class="flex py-2 gap-4">
-                    <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
+                    <span
+                      style="
+                        font-family: 'Public Sans', sans-serif;
+                        font-size: 15px;
+                        line-height: 22px;
+                        font-weight: 700;
+                        letter-spacing: 0.01em;
+                        text-transform: capitalize;
+                        color: #334155;
+                        flex-shrink: 0;
+                      "
+                      >Lorem Ipsum Dolor</span
+                    >
                     <div class="flex items-center gap-2">
                       <mat-icon class="text-emerald-500 text-base">check</mat-icon>
-                      <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">Yes</span>
+                      <span
+                        style="
+                          font-family: 'Public Sans', sans-serif;
+                          font-size: 15px;
+                          line-height: 22px;
+                          font-weight: 400;
+                          letter-spacing: 0.01em;
+                          text-transform: capitalize;
+                          color: var(--color-gray-soft-700, #525d73);
+                        "
+                        >Yes</span
+                      >
                     </div>
                   </div>
                   <div class="flex py-2 gap-4">
-                    <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
-                    <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">Sit</span>
+                    <span
+                      style="
+                        font-family: 'Public Sans', sans-serif;
+                        font-size: 15px;
+                        line-height: 22px;
+                        font-weight: 700;
+                        letter-spacing: 0.01em;
+                        text-transform: capitalize;
+                        color: #334155;
+                        flex-shrink: 0;
+                      "
+                      >Lorem Ipsum Dolor</span
+                    >
+                    <span
+                      style="
+                        font-family: 'Public Sans', sans-serif;
+                        font-size: 15px;
+                        line-height: 22px;
+                        font-weight: 400;
+                        letter-spacing: 0.01em;
+                        text-transform: capitalize;
+                        color: var(--color-gray-soft-700, #525d73);
+                      "
+                      >Sit</span
+                    >
                   </div>
                   <div class="flex py-2 gap-4">
-                    <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
-                    <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">Lorem Ipsum Dolor</span>
+                    <span
+                      style="
+                        font-family: 'Public Sans', sans-serif;
+                        font-size: 15px;
+                        line-height: 22px;
+                        font-weight: 700;
+                        letter-spacing: 0.01em;
+                        text-transform: capitalize;
+                        color: #334155;
+                        flex-shrink: 0;
+                      "
+                      >Lorem Ipsum Dolor</span
+                    >
+                    <span
+                      style="
+                        font-family: 'Public Sans', sans-serif;
+                        font-size: 15px;
+                        line-height: 22px;
+                        font-weight: 400;
+                        letter-spacing: 0.01em;
+                        text-transform: capitalize;
+                        color: var(--color-gray-soft-700, #525d73);
+                      "
+                      >Lorem Ipsum Dolor</span
+                    >
                   </div>
                   <div class="flex py-2 gap-4">
-                    <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; letter-spacing: 0.01em; text-transform: capitalize; color: #334155; flex-shrink: 0;">Lorem Ipsum Dolor</span>
-                    <span style="font-family: 'Public Sans', sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: 0.01em; text-transform: capitalize; color: var(--color-gray-soft-700, #525D73);">Lorem Ipsum Dolor</span>
+                    <span
+                      style="
+                        font-family: 'Public Sans', sans-serif;
+                        font-size: 15px;
+                        line-height: 22px;
+                        font-weight: 700;
+                        letter-spacing: 0.01em;
+                        text-transform: capitalize;
+                        color: #334155;
+                        flex-shrink: 0;
+                      "
+                      >Lorem Ipsum Dolor</span
+                    >
+                    <span
+                      style="
+                        font-family: 'Public Sans', sans-serif;
+                        font-size: 15px;
+                        line-height: 22px;
+                        font-weight: 400;
+                        letter-spacing: 0.01em;
+                        text-transform: capitalize;
+                        color: var(--color-gray-soft-700, #525d73);
+                      "
+                      >Lorem Ipsum Dolor</span
+                    >
                   </div>
                 </div>
               </section>
 
               <section>
-                <h2 class="font-bold text-gray-900 mb-4"
-                  style="font-size: 0.9375rem; line-height: 1.375rem; letter-spacing: 0.01em; text-transform: capitalize;">
-                  Lorem Ipsum Dolor Sit</h2>
+                <h2
+                  class="font-bold text-gray-900 mb-4"
+                  style="
+                    font-size: 0.9375rem;
+                    line-height: 1.375rem;
+                    letter-spacing: 0.01em;
+                    text-transform: capitalize;
+                  "
+                >
+                  Lorem Ipsum Dolor Sit
+                </h2>
                 <app-collapsible-cards></app-collapsible-cards>
               </section>
             </div>
@@ -170,22 +607,40 @@
 
         <!-- Right Column: Graph and popover - Flexible width with max constraint -->
         <div class="flex-1 max-w-[920px] overflow-y-auto">
-          <div class="bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col" style="padding: 20px 30px; gap: 20px;">
+          <div
+            class="bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col"
+            style="padding: 20px 30px; gap: 20px"
+          >
             <!-- Title -->
             <div>
               <h2
-                style="font-family: 'Public Sans', sans-serif; font-size: 20px; line-height: 22px; font-weight: 700; letter-spacing: var(--letter-spacing-1-percent, 0.01em); text-transform: capitalize; color: var(--color-success, #02983E);">
-                Lorem Lorem Lorem</h2>
+                style="
+                  font-family: 'Public Sans', sans-serif;
+                  font-size: 20px;
+                  line-height: 22px;
+                  font-weight: 700;
+                  letter-spacing: var(--letter-spacing-1-percent, 0.01em);
+                  text-transform: capitalize;
+                  color: var(--color-success, #02983e);
+                "
+              >
+                Lorem Lorem Lorem
+              </h2>
             </div>
 
             <!-- Graph Section -->
-            <div class="rounded-xl p-4 overflow-x-auto" style="background: var(--color-gray-soft-25, #FAFAFA);">
+            <div
+              class="rounded-xl p-4 overflow-x-auto"
+              style="background: var(--color-gray-soft-25, #fafafa)"
+            >
               @if (graphService.isLoading()) {
-              <div class="flex items-center justify-center" style="height: 19.25rem;">
-                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
-              </div>
+                <div class="flex items-center justify-center" style="height: 19.25rem">
+                  <div
+                    class="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"
+                  ></div>
+                </div>
               } @else {
-              <app-graph-view />
+                <app-graph-view />
               }
             </div>
 
