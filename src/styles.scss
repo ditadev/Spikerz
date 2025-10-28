@@ -3,3 +3,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --color-success: #02983E;
+    --color-warning: #FF9500;
+    --color-critical: #E5372B;
+    --color-gray-soft-25: #FAFAFA;
+    --color-gray-soft-400: #858D9D;
+    --color-gray-soft-500: #667085;
+    --color-gray-soft-700: #525D73;
+    --color-critical-dark: #C6190D;
+    --color-gray-soft-50: #F0F1F3;
+    --letter-spacing-1-percent: 0.01em;
+    --letter-spacing-400: 0.4px;
+    --shadow-tooltip: 0px 2px 2px 2px rgba(0, 0, 0, 0.16);
+    --shadow-card-sm: 0px 1px 3px 0px rgba(0, 0, 0, 0.05), 0px 1px 2px 0px rgba(0, 0, 0, 0.10);
+    --shadow-card-md: 0px 2.9px 4px 0px rgba(0, 0, 0, 0.05);
+  }

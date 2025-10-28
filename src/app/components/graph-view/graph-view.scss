@@ -1,12 +1,8 @@
-// Graph View Styles
-
 .graph-container {
-  height: 28rem; // Increased from 24rem to 28rem for more space
+  height: 19.25rem;
   
-  // Smooth scrolling
   scroll-behavior: smooth;
   
-  // Custom scrollbar styling
   &::-webkit-scrollbar {
     height: 0.5rem;
   }
@@ -25,9 +21,17 @@
     }
   }
   
-  // Firefox scrollbar
   scrollbar-width: thin;
   scrollbar-color: #D1D5DB #F3F4F6;
+  
+  @media (max-width: 767px) {
+    height: 21rem;
+  }
+  
+  @media (min-width: 1920px) {
+    max-width: 727px;
+    margin: 0 auto;
+  }
 }
 
 .animated-edge {

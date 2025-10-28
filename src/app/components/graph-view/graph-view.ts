@@ -43,7 +43,6 @@ export class GraphViewComponent implements OnDestroy {
       }
     });
     
-    // Listen for window resize
     if (typeof window !== 'undefined') {
       this.resizeHandler = () => this.onResize();
       window.addEventListener('resize', this.resizeHandler);
@@ -57,26 +56,18 @@ export class GraphViewComponent implements OnDestroy {
   }
 
   private layoutNodes(nodes: GraphNode[]): GraphNode[] {
-    const centerY = 140;
+    const centerY = 115;
     
-    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
-    const isLargeScreen = screenWidth >= 1024;
-    const isMediumScreen = screenWidth >= 768 && screenWidth < 1024;
-    
-    const startX = 30; 
-    const branchOffset = 90;
-    
-    const nodeGap = isLargeScreen ? 48 : 0; 
-    const baseSpacing = isMediumScreen ? 160 : 140;
-    
-    const branchExtraSpace = !isLargeScreen && !isMediumScreen ? 20 : 0;
+    const startX = 130;
+    const branchOffset = 70;
+    const baseSpacing = 128;
     
     const positions = [
       { x: startX, y: centerY },
-      { x: startX + baseSpacing + nodeGap, y: centerY },
-      { x: startX + (baseSpacing + nodeGap) * 2, y: centerY },
-      { x: startX + (baseSpacing + nodeGap) * 3 + branchExtraSpace, y: centerY - branchOffset },
-      { x: startX + (baseSpacing + nodeGap) * 3 + branchExtraSpace, y: centerY + branchOffset }
+      { x: startX + baseSpacing, y: centerY },
+      { x: startX + baseSpacing * 2, y: centerY },
+      { x: startX + baseSpacing * 3, y: centerY - branchOffset },
+      { x: startX + baseSpacing * 3, y: centerY + branchOffset }
     ];
   
     return nodes.map((node, index) => ({
@@ -85,21 +76,18 @@ export class GraphViewComponent implements OnDestroy {
       y: positions[index]?.y ?? centerY
     }));
   }
-  
-  getViewBoxWidth(): number {
-    const nodes = this.nodes();
-    if (nodes.length === 0) return 650;
-    
-    const rightmostX = Math.max(...nodes.map(n => (n.x ?? 0)));
-    const nodeRadius = 24;
-    const badgeWidth = 30;
-    const endPadding = 30;
-    
-    return Math.ceil(rightmostX + nodeRadius + badgeWidth + endPadding);
+
+  private onResize(): void {
+    const data = this.graphService.graphData();
+    if (data) {
+      const positionedNodes = this.layoutNodes(data.nodes);
+      this.nodes.set(positionedNodes);
+    }
   }
-  
-  getMinWidth(): number {
-    return this.getViewBoxWidth();
+
+  getNodePosition(nodeId: string): { x: number; y: number } {
+    const node = this.nodes().find(n => n.id === nodeId);
+    return node ? { x: node.x ?? 0, y: node.y ?? 0 } : { x: 0, y: 0 };
   }
   
   onNodeClick(node: GraphNode, event: MouseEvent): void {
@@ -115,7 +103,7 @@ export class GraphViewComponent implements OnDestroy {
     const tooltipData = this.getTooltipData(node);
     
     const svgRect = this.svgCanvas?.nativeElement.getBoundingClientRect();
-    const containerWidth = svgRect?.width ?? 650;
+    const containerWidth = svgRect?.width ?? 649;
     const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
     const isMobile = screenWidth < 768;
     
@@ -158,20 +146,16 @@ export class GraphViewComponent implements OnDestroy {
     const target = this.getNodePosition(edge.target);
     
     const nodeRadius = 24;
-    const arrowSpace = 12; 
+    const arrowSpace = 12;
     
-    // Start point: right edge of node 3 with spacing
     const startX = source.x + nodeRadius + 8;
     const startY = source.y;
     
-    // End point: left edge of target node with MORE spacing for arrowhead
     const endX = target.x - nodeRadius - arrowSpace;
     const endY = target.y;
     
-    // Calculate available width
     const availableWidth = endX - startX;
     
-    // From the SVG: proportions
     const firstSegmentRatio = 0.3886;
     const firstSegmentLength = availableWidth * firstSegmentRatio;
     const turn1X = startX + firstSegmentLength;
@@ -180,32 +164,17 @@ export class GraphViewComponent implements OnDestroy {
     const curveLength = availableWidth * curveRatio;
     const curveEndX = turn1X + curveLength;
     
-    // Control points for cubic bezier curve
     const cp1X = turn1X + curveLength * 0.5;
     const cp1Y = startY;
     const cp2X = turn1X + curveLength * 0.5;
     const cp2Y = endY;
     
-    // Path: horizontal → smooth S-curve → horizontal
     return `
       M ${startX},${startY}
       L ${turn1X},${startY}
       C ${cp1X},${cp1Y} ${cp2X},${cp2Y} ${curveEndX},${endY}
       L ${endX},${endY}
     `.trim().replace(/\s+/g, ' ');
-  }
-
-  private onResize(): void {
-    const data = this.graphService.graphData();
-    if (data) {
-      const positionedNodes = this.layoutNodes(data.nodes);
-      this.nodes.set(positionedNodes);
-    }
-  }
-
-  getNodePosition(nodeId: string): { x: number; y: number } {
-    const node = this.nodes().find(n => n.id === nodeId);
-    return node ? { x: node.x ?? 0, y: node.y ?? 0 } : { x: 0, y: 0 };
   }
 
   private getTooltipData(node: GraphNode): NodeTooltipData {

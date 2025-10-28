@@ -24,15 +24,26 @@
     }
   }
   
-  // Pagination buttons
-  button {
-    &:disabled {
-      cursor: not-allowed;
-      pointer-events: none;
+  .pagination-btn {
+    font-size: 20px;
+    font-weight: 300;
+    border: none;
+    background: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    position: relative;
+    
+    &:hover:not(.disabled) {
+      color: #1f2937;
+      transform: scale(1.2);
     }
     
-    &:not(:disabled):hover {
-      transform: scale(1.1);
+    &.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      pointer-events: none;
     }
   }
   
@@ -51,3 +62,16 @@
       transform: scale(1);
     }
   }
+
+button {
+  pointer-events: auto !important;
+  
+  &:disabled {
+    cursor: not-allowed;
+    pointer-events: auto !important;
+  }
+  
+  &:not(:disabled):hover {
+    transform: scale(1.1);
+  }
+}

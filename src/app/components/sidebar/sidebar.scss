@@ -1,6 +1,9 @@
 // Sidebar Styles
 
 .sidebar {
+  position: relative;
+  overflow: hidden; // No scrolling at all
+  
   &-expanded {
     width: var(--sidebar-width, 15rem);
   }
@@ -56,8 +59,7 @@
 }
 
 .collapse-button {
-  position: absolute;
-  right: -1rem;
+  position: fixed;
   top: calc(3.5rem - 8px);
   width: 2rem;
   height: 2rem;
@@ -68,7 +70,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 60;
+  z-index: 1000;
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%); // Center on the edge
   
   &:hover {
     background: #005a24;
@@ -76,6 +80,10 @@
   
   mat-icon {
     color: white;
+  }
+
+  @media (max-width: 768px) {
+    transform: none; // Remove transform on mobile
   }
 
   @media (max-width: 640px) {
@@ -87,16 +95,12 @@
 // Mobile-specific collapse button positioning
 @media (max-width: 768px) {
   .sidebar-collapsed .collapse-button {
-    position: fixed;
-    left: 0;
-    right: auto;
+    left: 0 !important;
   }
   
   .sidebar-expanded .collapse-button {
-    position: absolute;
-    right: 0;
-    left: auto;
-    transform: translateX(50%);
+    left: 50vw !important;
+    transform: translateX(-50%);
   }
 }
 
@@ -114,25 +118,7 @@
 
 // Scrollbar styling
 nav {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
-  
-  &::-webkit-scrollbar {
-    width: 0.25rem;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(156, 163, 175, 0.3);
-    border-radius: 0.25rem;
-    
-    &:hover {
-      background-color: rgba(156, 163, 175, 0.5);
-    }
-  }
+  overflow: hidden; // No scrolling
 }
 
 // Tooltip animation
@@ -154,6 +140,11 @@ button {
   
   img {
     flex-shrink: 0;
+  }
+  
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

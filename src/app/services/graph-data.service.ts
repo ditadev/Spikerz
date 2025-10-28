@@ -87,6 +87,7 @@ export class GraphDataService {
       title: 'Lorem Ipsum Dolor Sit',
       description: 'Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et Magna Faucibus. Dui Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce Senectus Facilisis Non Diam Leo Nulla Sem Pellentesque. Sit In Vel Sed Cursus Metus Sit Fringilla Vestibulum.',
       assets: [
+        // Page 1: 2 Critical
         { 
           id: '1', 
           name: 'Loremipsumdolorsit', 
@@ -98,6 +99,19 @@ export class GraphDataService {
           name: 'Loremipsumdolorsit002', 
           ipAddress: '192.168.1.2',
           riskLevel: 'Critical'
+        },
+        // Page 2: 1 Critical + 1 Low
+        { 
+          id: '3', 
+          name: 'Loremipsumdolorsit', 
+          ipAddress: '192.168.1.1',
+          riskLevel: 'Critical'
+        },
+        { 
+          id: '4', 
+          name: 'Loremipsumdolorsit002', 
+          ipAddress: '192.168.1.2',
+          riskLevel: 'Low'
         }
       ],
       metadata: {
@@ -107,10 +121,10 @@ export class GraphDataService {
         verified: true
       },
       riskSummary: {
-        critical: 2,
+        critical: 3,
         high: 0,
         medium: 0,
-        low: 0
+        low: 1
       }
     };
   
@@ -120,12 +134,13 @@ export class GraphDataService {
       position: { x: 0, y: 0 } 
     });
   }
-
+  
   selectNode(node: GraphNode, position: { x: number; y: number }): void {
     const details: NodeDetails = {
       title: 'Lorem Ipsum Dolor Sit',
       description: 'Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et Magna Faucibus. Dui Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce Senectus Facilisis Non Diam Leo Nulla Sem Pellentesque. Sit In Vel Sed Cursus Metus Sit Fringilla Vestibulum.',
       assets: [
+        // Page 1: 2 Critical
         { 
           id: '1', 
           name: 'Loremipsumdolorsit', 
@@ -137,6 +152,19 @@ export class GraphDataService {
           name: 'Loremipsumdolorsit002', 
           ipAddress: '192.168.1.2',
           riskLevel: 'Critical'
+        },
+        // Page 2: 1 Critical + 1 Low
+        { 
+          id: '3', 
+          name: 'Loremipsumdolorsit', 
+          ipAddress: '192.168.1.1',
+          riskLevel: 'Critical'
+        },
+        { 
+          id: '4', 
+          name: 'Loremipsumdolorsit002', 
+          ipAddress: '192.168.1.2',
+          riskLevel: 'Low'
         }
       ],
       metadata: {
@@ -146,13 +174,13 @@ export class GraphDataService {
         verified: true
       },
       riskSummary: {
-        critical: 2,
+        critical: 3,
         high: 0,
         medium: 0,
-        low: 0
+        low: 1
       }
     };
-
+  
     this._selectedNode.set({ node, details, position });
   }
 

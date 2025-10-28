@@ -1,6 +1,4 @@
 import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CardComponent } from '../shared/card/card';
 
 interface CollapsibleCard {
   id: string;
@@ -19,7 +17,6 @@ interface CardItem {
 @Component({
   selector: 'app-collapsible-cards',
   standalone: true,
-  imports: [CommonModule, CardComponent],
   templateUrl: './collapsible-cards.html',
   styleUrls: ['./collapsible-cards.scss']
 })
