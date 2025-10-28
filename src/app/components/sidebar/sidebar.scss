@@ -11,6 +11,10 @@
   &-collapsed {
     width: var(--sidebar-collapsed-width, 4rem);
     
+    @media (min-width: 1024px) {
+      width: 5rem; 
+    }
+    
     nav {
       padding-bottom: 0 !important;
       margin-bottom: 0 !important;
