@@ -28,7 +28,6 @@ export class NodePopoverComponent {
     const end = start + this.pageSize;
     const result = data.details.assets.slice(start, end);
     
-    console.log('📄 Computing paginated assets:', { page, start, end, result });
     return result;
   });
 
@@ -56,28 +55,23 @@ export class NodePopoverComponent {
       else if (level === 'Low') summary.low++;
     });
 
-    console.log('📊 Risk summary for page', this.currentPage(), ':', summary);
     return summary;
   });
 
   nextPage(): void {
     const current = this.currentPage();
     const total = this.totalPages();
-    console.log('➡️ Next clicked - Current:', current, 'Total:', total);
     
     if (current < total) {
       this.currentPage.set(current + 1);
-      console.log('✅ Page updated to:', this.currentPage());
     }
   }
 
   prevPage(): void {
     const current = this.currentPage();
-    console.log('⬅️ Prev clicked - Current:', current);
     
     if (current > 1) {
       this.currentPage.set(current - 1);
-      console.log('✅ Page updated to:', this.currentPage());
     }
   }
 
@@ -100,7 +94,6 @@ export class NodePopoverComponent {
     const circumference = this.getCircumference();
     const segmentLength = (summary.critical / total) * circumference;
     
-    console.log('Critical:', { segmentLength, total: summary.critical });
     return `${segmentLength} ${circumference - segmentLength}`;
   }
 
@@ -112,7 +105,6 @@ export class NodePopoverComponent {
     const circumference = this.getCircumference();
     const segmentLength = (summary.high / total) * circumference;
     
-    console.log('High:', { segmentLength, total: summary.high });
     return `${segmentLength} ${circumference - segmentLength}`;
   }
 
@@ -124,7 +116,6 @@ export class NodePopoverComponent {
     const circumference = this.getCircumference();
     const segmentLength = (summary.medium / total) * circumference;
     
-    console.log('Medium:', { segmentLength, total: summary.medium });
     return `${segmentLength} ${circumference - segmentLength}`;
   }
 
@@ -136,13 +127,12 @@ export class NodePopoverComponent {
     const circumference = this.getCircumference();
     const segmentLength = (summary.low / total) * circumference;
     
-    console.log('Low:', { segmentLength, total: summary.low });
     return `${segmentLength} ${circumference - segmentLength}`;
   }
 
   // Get stroke-dashoffset to position each segment
   getCriticalDashOffset(): number {
-    return 0; // Critical always starts at the top (0 offset)
+    return 0; 
   }
 
   getHighDashOffset(): number {

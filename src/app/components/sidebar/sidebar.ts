@@ -16,6 +16,7 @@ interface MenuItem {
 })
 export class SidebarComponent implements OnInit {
   isCollapsed = signal(false);
+  isHovering = signal(false); // Added this signal
   activeMenuIndex = signal(3);
   activeBottomMenuIndex = signal<number | null>(null);
 
@@ -54,6 +55,10 @@ export class SidebarComponent implements OnInit {
 
   toggleSidebar(): void {
     this.isCollapsed.update(collapsed => !collapsed);
+  }
+
+  onSidebarHover(hovering: boolean): void {
+    this.isHovering.set(hovering);
   }
 
   selectMenuItem(index: number): void {
