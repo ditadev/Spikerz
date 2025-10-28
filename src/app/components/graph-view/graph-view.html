@@ -3,15 +3,16 @@
     <div class="min-w-[695px] lg:min-w-0 lg:w-full lg:h-full">
       <svg
         #svgCanvas
-        class="w-full h-full"
-        viewBox="0 0 727 307"
+        class="w-full"
+        style="height: calc(100% - 78px)"
+        viewBox="0 0 695 250"
         preserveAspectRatio="xMidYMid meet"
         (click)="onCanvasClick($event)"
         (keydown.enter)="onCanvasClick($event)"
         (keydown.space)="onCanvasClick($event)"
         tabindex="0"
-        role="img"
-        aria-label="Network graph visualization"
+        role="application"
+        aria-label="Network graph"
       >
         <defs>
           <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">

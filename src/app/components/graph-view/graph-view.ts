@@ -94,8 +94,8 @@ export class GraphViewComponent implements OnDestroy {
     return node ? { x: node.x ?? 0, y: node.y ?? 0 } : { x: 0, y: 0 };
   }
 
-  onNodeClick(node: GraphNode, event: MouseEvent): void {
-    event.stopPropagation();
+  onNodeClick(_node: GraphNode, _event: MouseEvent): void {
+    _event.stopPropagation();
   }
 
   onNodeTouch(node: GraphNode, event: TouchEvent): void {
@@ -103,7 +103,8 @@ export class GraphViewComponent implements OnDestroy {
     event.stopPropagation();
   }
 
-  onNodeHover(node: GraphNode): void {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onNodeHover(node: GraphNode, event: MouseEvent): void {
     const tooltipData = this.getTooltipData(node);
 
     const svgRect = this.svgCanvas?.nativeElement.getBoundingClientRect();
@@ -145,7 +146,8 @@ export class GraphViewComponent implements OnDestroy {
     }
   }
 
-  getBranchPath(edge: GraphEdge): string {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getBranchPath(edge: GraphEdge, _direction: 'up' | 'down'): string {
     const source = this.getNodePosition(edge.source);
     const target = this.getNodePosition(edge.target);
 
@@ -227,7 +229,7 @@ export class GraphViewComponent implements OnDestroy {
     }
   }
 
-  onCanvasClick(event: MouseEvent | KeyboardEvent): void {
+  onCanvasClick(event: Event): void {
     if ((event.target as HTMLElement).tagName === 'svg') {
       this.graphService.clearSelection();
     }
