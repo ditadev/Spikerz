@@ -9,7 +9,7 @@ export interface NodeTooltipData {
   documentTitle?: string;
   contentLines?: string[];
   gridNumbers?: string[];
-  badges?: Array<{ color: string; text: string }>;
+  badges?: { color: string; text: string }[];
 }
 
 @Component({
@@ -17,7 +17,7 @@ export interface NodeTooltipData {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './node-tooltip.html',
-  styleUrls: ['./node-tooltip.scss']
+  styleUrls: ['./node-tooltip.scss'],
 })
 export class NodeTooltipComponent {
   @Input() data: NodeTooltipData | null = null;
