@@ -1,35 +1,36 @@
 .graph-container {
   height: 19.25rem;
-  
+  position: relative;
+
   scroll-behavior: smooth;
-  
+
   &::-webkit-scrollbar {
     height: 0.5rem;
   }
-  
+
   &::-webkit-scrollbar-track {
-    background: #F3F4F6;
+    background: #f3f4f6;
     border-radius: 0.25rem;
   }
-  
+
   &::-webkit-scrollbar-thumb {
-    background: #D1D5DB;
+    background: #d1d5db;
     border-radius: 0.25rem;
-    
+
     &:hover {
-      background: #9CA3AF;
+      background: #9ca3af;
     }
   }
-  
+
   scrollbar-width: thin;
-  scrollbar-color: #D1D5DB #F3F4F6;
-  
+  scrollbar-color: #d1d5db #f3f4f6;
+
   @media (max-width: 767px) {
-    height: 21rem;
+    height: 21rem; // Increased to 21rem to give room for taller graph + legend
   }
-  
+
   @media (min-width: 1920px) {
-    max-width: 727px;
+    max-width: 800px;
     margin: 0 auto;
   }
 }
@@ -46,7 +47,7 @@
 
 .node-circle {
   filter: drop-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
-  
+
   &:hover {
     filter: drop-shadow(0 0.25rem 0.375rem rgba(0, 0, 0, 0.15));
   }
@@ -54,7 +55,7 @@
 
 .node-group {
   transition: transform 0.2s ease;
-  
+
   &:hover {
     .node-circle {
       transform: scale(1.05);

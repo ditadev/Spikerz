@@ -70,8 +70,8 @@ export class GraphViewComponent implements OnDestroy {
       { x: startX, y: centerY },
       { x: startX + baseSpacing, y: centerY },
       { x: startX + baseSpacing * 2, y: centerY },
-      { x: startX + baseSpacing * 3, y: centerY - branchOffset },
-      { x: startX + baseSpacing * 3, y: centerY + branchOffset },
+      { x: startX + baseSpacing * 3 + 120, y: centerY - branchOffset }, // Moved node 4 right by 20px
+      { x: startX + baseSpacing * 3 + 120, y: centerY + branchOffset }, // Moved node 5 right by 20px
     ];
 
     return nodes.map((node, index) => ({
@@ -79,6 +79,50 @@ export class GraphViewComponent implements OnDestroy {
       x: positions[index]?.x ?? startX + index * baseSpacing,
       y: positions[index]?.y ?? centerY,
     }));
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getBranchPath(edge: GraphEdge, _direction: 'up' | 'down'): string {
+    const source = this.getNodePosition(edge.source);
+    const target = this.getNodePosition(edge.target);
+
+    const nodeRadius = 24;
+
+    // Start point - right edge of source node
+    const startX = source.x + nodeRadius + 4;
+    const startY = source.y;
+
+    // End point - MUCH closer to target (12px from edge instead of previous distances)
+    const endX = target.x - nodeRadius + 12; // +12 makes the final straight segment VERY long
+    const endY = target.y;
+
+    // Calculate control points
+    const horizontalDistance = endX - startX;
+
+    // First horizontal segment (about 30% of total distance)
+    const firstSegmentLength = horizontalDistance * 0.3;
+    const curveStartX = startX + firstSegmentLength;
+
+    // Curve segment (about 50% of total distance)
+    const curveLength = horizontalDistance * 0.5;
+    const curveEndX = curveStartX + curveLength;
+
+    // Control points for smooth bezier curve
+    const controlPoint1X = curveStartX + curveLength * 0.3;
+    const controlPoint1Y = startY;
+
+    const controlPoint2X = curveStartX + curveLength * 0.7;
+    const controlPoint2Y = endY;
+
+    // Final L segment from curveEndX to endX is now VISIBLY longer (20% of total path)
+    return `
+      M ${startX},${startY}
+      L ${curveStartX},${startY}
+      C ${controlPoint1X},${controlPoint1Y} ${controlPoint2X},${controlPoint2Y} ${curveEndX},${endY}
+      L ${endX},${endY}
+    `
+      .trim()
+      .replace(/\s+/g, ' ');
   }
 
   private onResize(): void {
@@ -144,45 +188,6 @@ export class GraphViewComponent implements OnDestroy {
     if (screenWidth >= 768) {
       this.hoveredNode.set(null);
     }
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getBranchPath(edge: GraphEdge, _direction: 'up' | 'down'): string {
-    const source = this.getNodePosition(edge.source);
-    const target = this.getNodePosition(edge.target);
-
-    const nodeRadius = 24;
-    const arrowSpace = 12;
-
-    const startX = source.x + nodeRadius + 8;
-    const startY = source.y;
-
-    const endX = target.x - nodeRadius - arrowSpace;
-    const endY = target.y;
-
-    const availableWidth = endX - startX;
-
-    const firstSegmentRatio = 0.3886;
-    const firstSegmentLength = availableWidth * firstSegmentRatio;
-    const turn1X = startX + firstSegmentLength;
-
-    const curveRatio = 0.3075;
-    const curveLength = availableWidth * curveRatio;
-    const curveEndX = turn1X + curveLength;
-
-    const cp1X = turn1X + curveLength * 0.5;
-    const cp1Y = startY;
-    const cp2X = turn1X + curveLength * 0.5;
-    const cp2Y = endY;
-
-    return `
-      M ${startX},${startY}
-      L ${turn1X},${startY}
-      C ${cp1X},${cp1Y} ${cp2X},${cp2Y} ${curveEndX},${endY}
-      L ${endX},${endY}
-    `
-      .trim()
-      .replace(/\s+/g, ' ');
   }
 
   private getTooltipData(node: GraphNode): NodeTooltipData {
